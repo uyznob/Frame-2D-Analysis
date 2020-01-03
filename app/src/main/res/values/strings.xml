@@ -3,4 +3,9 @@
     <string name="title_input">Input</string>
     <string name="title_output">Output</string>
     <string name="title_note">Note</string>
+
+    <string name="tsdauvao">Input</string>
+    <string name="tsdaura">Output</string>
+    <string name="tinhtoan">Compute</string>
+    <string name="luu">Save</string>
 </resources>

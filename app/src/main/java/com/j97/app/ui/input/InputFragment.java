@@ -1,5 +1,6 @@
 package com.j97.app.ui.input;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -51,6 +52,8 @@ public class InputFragment extends Fragment implements View.OnClickListener {
       case R.id.button_define_material:
         break;
       case R.id.button_load_material:
+        Intent materialLoadScreenIntent = new Intent(v.getContext(), MaterialLoad.class);
+        startActivity(materialLoadScreenIntent);
         break;
       case R.id.button_define_node:
         break;
