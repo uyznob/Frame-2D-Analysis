@@ -1,94 +1,258 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:paddingLeft="@dimen/padding_dim"
-    android:paddingRight="@dimen/padding_dim">
+    android:background="@android:color/white"
+    android:orientation="vertical">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/row1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/rectImage"
-                android:layout_width="@dimen/pic_size"
-                android:layout_height="@dimen/pic_size"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 android:layout_gravity="center"
-                android:contentDescription="TODO"
-                android:src="@drawable/rectangle" />
+                app:cardBackgroundColor="@android:color/white"
+                app:cardCornerRadius="4dp"
+                app:cardElevation="2dp"
+                app:cardPreventCornerOverlap="true"
+                app:cardUseCompatPadding="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="w,1:1"
+                app:layout_constraintEnd_toStartOf="@+id/circImage"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="TODO"
+                    android:src="@drawable/rectangle" />
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
                 android:id="@+id/circImage"
-                android:layout_width="@dimen/pic_size"
-                android:layout_height="@dimen/pic_size"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 android:layout_gravity="center"
                 android:contentDescription="TODO"
-                android:src="@drawable/circle" />
+                android:src="@drawable/circle"
+                app:cardBackgroundColor="@android:color/white"
+                app:cardCornerRadius="4dp"
+                app:cardElevation="2dp"
+                app:cardPreventCornerOverlap="true"
+                app:cardUseCompatPadding="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="w,1:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/rectImage"
+                app:layout_constraintTop_toTopOf="parent">
 
-        </LinearLayout>
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="TODO"
+                    android:src="@drawable/circle" />
 
-        <LinearLayout
+            </androidx.cardview.widget.CardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/row2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/row1">
 
-            <ImageView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/pipeImage"
-                android:layout_width="@dimen/pic_size"
-                android:layout_height="@dimen/pic_size"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 android:layout_gravity="center"
-                android:contentDescription="TODO"
-                android:src="@drawable/pipe" />
+                app:cardBackgroundColor="@android:color/white"
+                app:cardCornerRadius="4dp"
+                app:cardElevation="2dp"
+                app:cardPreventCornerOverlap="true"
+                app:cardUseCompatPadding="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="w,1:1"
+                app:layout_constraintEnd_toStartOf="@+id/tubeImage"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="TODO"
+                    android:src="@drawable/pipe" />
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
                 android:id="@+id/tubeImage"
-                android:layout_width="@dimen/pic_size"
-                android:layout_height="@dimen/pic_size"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 android:layout_gravity="center"
                 android:contentDescription="TODO"
-                android:src="@drawable/tube" />
+                android:src="@drawable/circle"
+                app:cardBackgroundColor="@android:color/white"
+                app:cardCornerRadius="4dp"
+                app:cardElevation="2dp"
+                app:cardPreventCornerOverlap="true"
+                app:cardUseCompatPadding="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="w,1:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/pipeImage"
+                app:layout_constraintTop_toTopOf="parent">
 
-        </LinearLayout>
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="TODO"
+                    android:src="@drawable/tube" />
 
-        <LinearLayout
+            </androidx.cardview.widget.CardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/row3"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/row2">
 
-            <ImageView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/ibeamImage"
-                android:layout_width="@dimen/pic_size"
-                android:layout_height="@dimen/pic_size"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 android:layout_gravity="center"
-                android:contentDescription="TODO"
-                android:src="@drawable/ibeam" />
+                app:cardBackgroundColor="@android:color/white"
+                app:cardCornerRadius="4dp"
+                app:cardElevation="2dp"
+                app:cardPreventCornerOverlap="true"
+                app:cardUseCompatPadding="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="w,1:1"
+                app:layout_constraintEnd_toStartOf="@+id/channelImage"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="TODO"
+                    android:src="@drawable/ibeam" />
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
                 android:id="@+id/channelImage"
-                android:layout_width="@dimen/pic_size"
-                android:layout_height="@dimen/pic_size"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 android:layout_gravity="center"
                 android:contentDescription="TODO"
-                android:src="@drawable/channel" />
+                android:src="@drawable/circle"
+                app:cardBackgroundColor="@android:color/white"
+                app:cardCornerRadius="4dp"
+                app:cardElevation="2dp"
+                app:cardPreventCornerOverlap="true"
+                app:cardUseCompatPadding="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="w,1:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/ibeamImage"
+                app:layout_constraintTop_toTopOf="parent">
 
-        </LinearLayout>
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="TODO"
+                    android:src="@drawable/channel" />
 
-        <LinearLayout
+            </androidx.cardview.widget.CardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/row4"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/row3">
 
-            <ImageView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/doubleangleImage"
-                android:layout_width="@dimen/pic_size"
-                android:layout_height="@dimen/pic_size"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_gravity="center"
+                app:cardBackgroundColor="@android:color/white"
+                app:cardCornerRadius="4dp"
+                app:cardElevation="2dp"
+                app:cardPreventCornerOverlap="true"
+                app:cardUseCompatPadding="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="w,1:1"
+                app:layout_constraintEnd_toStartOf="@+id/aa"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="TODO"
+                    android:src="@drawable/doubleangle" />
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:visibility="invisible"
+                android:id="@+id/aa"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 android:layout_gravity="center"
                 android:contentDescription="TODO"
-                android:src="@drawable/doubleangle" />
+                android:src="@drawable/circle"
+                app:cardBackgroundColor="@android:color/white"
+                app:cardCornerRadius="4dp"
+                app:cardElevation="2dp"
+                app:cardPreventCornerOverlap="true"
+                app:cardUseCompatPadding="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="w,1:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/doubleangleImage"
+                app:layout_constraintTop_toTopOf="parent">
 
-        </LinearLayout>
-    </LinearLayout>
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="TODO"
+                    android:src="@drawable/channel" />
+
+            </androidx.cardview.widget.CardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </ScrollView>
