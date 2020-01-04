@@ -8,4 +8,7 @@
     <string name="tsdaura">Output</string>
     <string name="tinhtoan">Compute</string>
     <string name="luu">Save</string>
+    <string name="material_define">Material define</string>
+    <string name="invalid_input">Invalid input</string>
+    <string name="materials">Materials</string>
 </resources>

@@ -2,6 +2,7 @@ package com.j97.app.ui.input;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.j97.app.R;
+import com.j97.app.data.local.AppDatabase;
+import com.j97.app.data.local.MaterialModel;
+
+import java.util.List;
 
 public class InputFragment extends Fragment implements View.OnClickListener {
   @Nullable
@@ -25,6 +30,9 @@ public class InputFragment extends Fragment implements View.OnClickListener {
     super.onViewCreated(view, savedInstanceState);
     final Button buttonDefineMaterial = view.findViewById(R.id.button_define_material);
     final Button buttonLoadMaterial = view.findViewById(R.id.button_load_material);
+    final Button buttonViewMaterial = view.findViewById(R.id.button_view_material);
+
+
     final Button buttonDefineNode = view.findViewById(R.id.button_define_node);
     final Button buttonLoadNode = view.findViewById(R.id.button_load_node);
     final Button buttonDefineElement = view.findViewById(R.id.button_define_element);
@@ -36,6 +44,7 @@ public class InputFragment extends Fragment implements View.OnClickListener {
 
     buttonDefineMaterial.setOnClickListener(this);
     buttonLoadMaterial.setOnClickListener(this);
+    buttonViewMaterial.setOnClickListener(this);
     buttonDefineNode.setOnClickListener(this);
     buttonLoadNode.setOnClickListener(this);
     buttonDefineElement.setOnClickListener(this);
@@ -50,10 +59,16 @@ public class InputFragment extends Fragment implements View.OnClickListener {
   public void onClick(View v) {
     switch (v.getId()) {
       case R.id.button_define_material:
+        Intent toMaterialDefine = new Intent(v.getContext(), MaterialDefineActivity.class);
+        startActivity(toMaterialDefine);
         break;
       case R.id.button_load_material:
         Intent materialLoadScreenIntent = new Intent(v.getContext(), MaterialLoad.class);
         startActivity(materialLoadScreenIntent);
+        break;
+      case R.id.button_view_material:
+        Intent toViewMaterials = new Intent(v.getContext(), ViewMaterialsActivity.class);
+        startActivity(toViewMaterials);
         break;
       case R.id.button_define_node:
         break;

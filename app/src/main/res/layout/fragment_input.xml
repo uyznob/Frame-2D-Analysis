@@ -41,6 +41,7 @@
                     android:id="@+id/button_define_material"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
                     android:backgroundTint="@color/colorAccent"
@@ -48,7 +49,7 @@
                     android:padding="18dp"
                     android:text="define"
                     app:cornerRadius="16dp"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/button_view_material"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toEndOf="@+id/button_load_material"
                     app:layout_constraintTop_toBottomOf="@id/text_material" />
@@ -59,7 +60,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
-                    android:layout_marginEnd="16dp"
                     android:backgroundTint="@color/colorAccent"
                     android:fontFamily="@font/noto_sans"
                     android:padding="18dp"
@@ -68,6 +68,23 @@
                     app:layout_constraintEnd_toStartOf="@+id/button_define_material"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/text_material" />
+
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/button_view_material"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:backgroundTint="@color/colorAccent"
+                    android:fontFamily="@font/noto_sans"
+                    android:padding="18dp"
+                    android:text="View"
+                    app:cornerRadius="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/button_define_material"
                     app:layout_constraintTop_toBottomOf="@id/text_material" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
