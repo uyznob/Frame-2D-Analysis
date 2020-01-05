@@ -12,6 +12,8 @@ import androidx.annotation.Nullable;
 
 import com.j97.app.MainActivity;
 import com.j97.app.R;
+import com.j97.app.data.local.AppDatabase;
+import com.j97.app.data.local.MaterialModel;
 
 import static  com.j97.app.Utils.area3;
 import static  com.j97.app.Utils.ix3;
@@ -20,7 +22,7 @@ import static  com.j97.app.Utils.iy3;
 public class Pipe extends Activity {
     private String dText, tText;
     private Double d, t, area, ix, iy;
-    private EditText dEditText, tEditText, areaEditText, ixEditText, iyEditText;
+    private EditText dEditText, tEditText, areaEditText, ixEditText, eEditText;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -28,6 +30,7 @@ public class Pipe extends Activity {
         // Set the layout
         setContentView(R.layout.pipe_layout);
         // Take the edit text objects
+        eEditText = findViewById(R.id.eEditText);
         dEditText = findViewById(R.id.dEditText);
         tEditText = findViewById(R.id.tEditText);
         areaEditText = findViewById(R.id.areaEditText);
@@ -54,12 +57,52 @@ public class Pipe extends Activity {
                 ixEditText.setText(ix.toString());
             }
         });
+
+        Button saveButton = findViewById(R.id.saveButton);
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String eText = eEditText.getText().toString();
+                String aText = areaEditText.getText().toString();
+                String iText = ixEditText.getText().toString();
+                String dText = dEditText.getText().toString();
+                String tText = tEditText.getText().toString();
+                String typeText;
+
+                double e;
+                double a;
+                double i;
+
+                try {
+                    e = Double.parseDouble(eText);
+                } catch (NumberFormatException ignored) {
+                    Toast.makeText(Pipe.this, R.string.invalid_input, Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                try {
+                    a = Double.parseDouble(aText);
+                } catch (NumberFormatException ignored) {
+                    Toast.makeText(Pipe.this, R.string.invalid_input, Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                try {
+                    i = Double.parseDouble(iText);
+                } catch (NumberFormatException ignored) {
+                    Toast.makeText(Pipe.this, R.string.invalid_input, Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                typeText = "P"+dText+"x"+tText;
+                MaterialModel materialModel = new MaterialModel(1, typeText, e, a, i);
+                AppDatabase.getDatabase(Pipe.this)
+                        .materialDao()
+                        .insert(materialModel);
+                Toast.makeText(Pipe.this, R.string.insert_success, Toast.LENGTH_SHORT).show();
+                finish();
+            }
+        });
     }
 
-    public void onBackButtonClick(View view) {
-        // Passing a Context and the Activity that we want to open
-        Intent mainScreenIntent = new Intent(this, MainActivity.class);
-        //Start activity and don't expect a result to be sent back
-        startActivity(mainScreenIntent);
-    }
 }
