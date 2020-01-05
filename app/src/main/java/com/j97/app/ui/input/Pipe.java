@@ -42,7 +42,7 @@ public class Pipe extends Activity {
                 tText = tEditText.getText().toString();
                 if ((dText.matches("") || tText.matches("")) ||
                         (Double.parseDouble(dText) <= 0 || Double.parseDouble(tText) <= 0)) {
-                    Toast.makeText(Pipe.this, "Hãy nhập lại", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Pipe.this, R.string.reinput, Toast.LENGTH_SHORT).show();
                     return;
                 }
                 d = Double.parseDouble(dText);
@@ -52,8 +52,6 @@ public class Pipe extends Activity {
                 areaEditText.setText(area.toString());
                 ix = ix3(d, t);
                 ixEditText.setText(ix.toString());
-                iy = iy3(d, t);
-                iyEditText.setText(iy.toString());
             }
         });
     }

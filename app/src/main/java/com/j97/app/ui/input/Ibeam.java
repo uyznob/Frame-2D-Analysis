@@ -47,7 +47,7 @@ public class Ibeam extends Activity {
                 tfText = tfEditText.getText().toString();
                 if ((hText.matches("") || wText.matches("") || twText.matches("") || tfText.matches("")) ||
                         (Double.parseDouble(hText) <= 0 || Double.parseDouble(wText) <= 0 || Double.parseDouble(twText) <= 0 || Double.parseDouble(tfText) <= 0)) {
-                    Toast toast = Toast.makeText(Ibeam.this, "Hãy nhập lại", Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(Ibeam.this, R.string.reinput, Toast.LENGTH_SHORT);
                     toast.show();
                     return;
                 }
@@ -60,8 +60,6 @@ public class Ibeam extends Activity {
                 areaEditText.setText(area.toString());
                 ix = ix5(h, w, tw, tf);
                 ixEditText.setText(ix.toString());
-                iy = iy5(h, w, tw, tf);
-                iyEditText.setText(iy.toString());
             }
         });
     }

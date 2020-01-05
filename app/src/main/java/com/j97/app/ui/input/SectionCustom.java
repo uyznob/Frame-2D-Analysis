@@ -14,7 +14,7 @@ import com.j97.app.R;
 import com.j97.app.data.local.AppDatabase;
 import com.j97.app.data.local.MaterialModel;
 
-public class MaterialDefineActivity extends AppCompatActivity implements View.OnClickListener {
+public class SectionCustom extends AppCompatActivity implements View.OnClickListener {
 
   private EditText editTextA;
   private EditText editTextE;
@@ -23,10 +23,10 @@ public class MaterialDefineActivity extends AppCompatActivity implements View.On
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.material_define_layout);
+    setContentView(R.layout.section_custom_layout);
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-    findViewById(R.id.button_load_material_custom_save).setOnClickListener(this);
+    findViewById(R.id.section_custom_save).setOnClickListener(this);
 
     editTextA = findViewById(R.id.editTextA);
     editTextE = findViewById(R.id.editTextE);
@@ -75,7 +75,7 @@ public class MaterialDefineActivity extends AppCompatActivity implements View.On
     AppDatabase.getDatabase(this)
         .materialDao()
         .insert(materialModel);
-    Toast.makeText(this, "Insert successfully", Toast.LENGTH_SHORT).show();
+    Toast.makeText(this, R.string.insert_success, Toast.LENGTH_SHORT).show();
     finish();
   }
 }

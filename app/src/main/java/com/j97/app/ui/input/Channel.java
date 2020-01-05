@@ -7,22 +7,25 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
 import androidx.annotation.Nullable;
 
 import com.j97.app.MainActivity;
 import com.j97.app.R;
+import com.j97.app.data.local.AppDatabase;
+import com.j97.app.data.local.MaterialModel;
 
-import static  com.j97.app.Utils.area6;
-import static  com.j97.app.Utils.ix6;
-import static  com.j97.app.Utils.iy6;
+import static com.j97.app.Utils.area6;
+import static com.j97.app.Utils.ix6;
 
 import static java.lang.Math.round;
 
 public class Channel extends Activity {
     private double sum;
     private String hText, wText, twText, tfText;
-    private Double h, w, tw, tf, area, ix, iy, iyg, xg;
-    private EditText hEditText, wEditText, twEditText, tfEditText, areaEditText, ixEditText, iyEditText, xgEditText, iygEditText;
+    private Double h, w, tw, tf, area, ix;
+    private EditText hEditText, wEditText, twEditText, tfEditText, areaEditText, ixEditText;
+    private EditText editTextE;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -30,11 +33,13 @@ public class Channel extends Activity {
         // Set the layout
         setContentView(R.layout.channel_layout);
         // Take the edit text objects
+        editTextE = findViewById(R.id.editTextE);
         hEditText = findViewById(R.id.hEditText);
         wEditText = findViewById(R.id.wEditText);
         twEditText = findViewById(R.id.twEditText);
         tfEditText = findViewById(R.id.tfEditText);
         areaEditText = findViewById(R.id.areaEditText);
+        ixEditText = findViewById(R.id.ixEditText);
         // Set up button as in layout
         Button calcButton = findViewById(R.id.calcButton);
         calcButton.setOnClickListener(new View.OnClickListener() {
@@ -47,7 +52,7 @@ public class Channel extends Activity {
                 tfText = tfEditText.getText().toString();
                 if ((hText.matches("") || wText.matches("") || twText.matches("") || tfText.matches("")) ||
                         (Double.parseDouble(hText) <= 0 || Double.parseDouble(wText) <= 0 || Double.parseDouble(twText) <= 0 || Double.parseDouble(tfText) <= 0)) {
-                    Toast toast = Toast.makeText(Channel.this, "Hãy nhập lại", Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(Channel.this, R.string.reinput, Toast.LENGTH_SHORT);
                     toast.show();
                     return;
                 }
@@ -60,12 +65,47 @@ public class Channel extends Activity {
                 areaEditText.setText(area.toString());
                 ix = ix6(h, w, tw, tf);
                 ixEditText.setText(ix.toString());
-                iy = iy6(h, w, tw, tf);
-                iyEditText.setText(iy.toString());
-                xg = xg6(h, w, tw, tf);
-                xgEditText.setText(xg.toString());
-                iyg = round((iy - area*xg*xg)*100.0)/100.0;
-                iygEditText.setText(iyg.toString());
+            }
+        });
+        Button saveButton = findViewById(R.id.saveButton);
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String eText = editTextE.getText().toString();
+                String aText = areaEditText.getText().toString();
+                String iText = ixEditText.getText().toString();
+
+                double e;
+                double a;
+                double i;
+
+                try {
+                    e = Double.parseDouble(eText);
+                } catch (NumberFormatException ignored) {
+                    Toast.makeText(Channel.this, R.string.invalid_input, Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                try {
+                    a = Double.parseDouble(aText);
+                } catch (NumberFormatException ignored) {
+                    Toast.makeText(Channel.this, R.string.invalid_input, Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                try {
+                    i = Double.parseDouble(iText);
+                } catch (NumberFormatException ignored) {
+                    Toast.makeText(Channel.this, R.string.invalid_input, Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                MaterialModel materialModel = new MaterialModel(1, "custom", e, a, i);
+                AppDatabase.getDatabase(Channel.this)
+                        .materialDao()
+                        .insert(materialModel);
+                Toast.makeText(Channel.this, R.string.insert_success, Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
     }

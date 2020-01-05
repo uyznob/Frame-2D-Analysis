@@ -6,9 +6,21 @@
 
     <string name="tsdauvao">Input</string>
     <string name="tsdaura">Output</string>
-    <string name="tinhtoan">Compute</string>
+    <string name="tinhtoan">Calculate</string>
     <string name="luu">Save</string>
-    <string name="material_define">Material define</string>
+    <string name="material_define">Material Custom</string>
     <string name="invalid_input">Invalid input</string>
     <string name="materials">Materials</string>
+    <string name="rectangle">Rectangle</string>
+    <string name="cirlce">Circle</string>
+    <string name="pipe">Pipe</string>
+    <string name="tube">Tube</string>
+    <string name="ibeam">I beam</string>
+    <string name="channel">Channel</string>
+    <string name="doubleangle">Double angle</string>
+    <string name="custom">Custom</string>
+    <string name="define">Define</string>
+    <string name="view">View</string>
+    <string name="reinput">Please check input</string>
+    <string name="insert_success">Insert successfully</string>
 </resources>

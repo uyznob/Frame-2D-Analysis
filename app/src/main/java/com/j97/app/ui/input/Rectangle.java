@@ -43,7 +43,7 @@ public class Rectangle extends Activity {
                 wText = wEditText.getText().toString();
                 if ((hText.matches("") || wText.matches("")) ||
                         (Double.parseDouble(hText) <= 0 || Double.parseDouble(wText) <= 0)) {
-                    Toast.makeText(Rectangle.this, "Hãy nhập lại", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Rectangle.this, R.string.reinput, Toast.LENGTH_SHORT).show();
                     return;
                 }
                 h = Double.parseDouble(hText);
@@ -53,8 +53,6 @@ public class Rectangle extends Activity {
                 areaEditText.setText(area.toString());
                 ix = ix1(h, w);
                 ixEditText.setText(ix.toString());
-                iy = iy1(h, w);
-                iyEditText.setText(iy.toString());
             }
         });
     }

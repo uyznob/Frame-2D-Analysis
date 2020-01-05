@@ -21,47 +21,47 @@
         </activity>
 
         <activity
-            android:name=".ui.input.MaterialLoad"
-            android:label="@string/app_name"
+            android:name=".ui.input.MaterialDefine"
+            android:label="@string/materials"
             android:theme="@style/AppTheme" />
 
         <activity
             android:name=".ui.input.Rectangle"
-            android:label="@string/app_name"
+            android:label="@string/materials"
             android:theme="@style/AppTheme" />
 
         <activity
             android:name=".ui.input.Circle"
-            android:label="@string/app_name"
+            android:label="@string/materials"
             android:theme="@style/AppTheme" />
 
         <activity
             android:name=".ui.input.Pipe"
-            android:label="@string/app_name"
+            android:label="@string/materials"
             android:theme="@style/AppTheme" />
 
         <activity
             android:name=".ui.input.Tube"
-            android:label="@string/app_name"
+            android:label="@string/materials"
             android:theme="@style/AppTheme" />
 
         <activity
             android:name=".ui.input.Ibeam"
-            android:label="@string/app_name"
+            android:label="@string/materials"
             android:theme="@style/AppTheme" />
 
         <activity
             android:name=".ui.input.Channel"
-            android:label="@string/app_name"
+            android:label="@string/materials"
             android:theme="@style/AppTheme" />
 
         <activity
             android:name=".ui.input.Doubleangle"
-            android:label="@string/app_name"
+            android:label="@string/materials"
             android:theme="@style/AppTheme" />
 
         <activity
-            android:name=".ui.input.MaterialDefineActivity"
+            android:name=".ui.input.SectionCustom"
             android:label="@string/material_define"
             android:theme="@style/AppTheme" />
 

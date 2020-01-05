@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -12,13 +11,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.j97.app.R;
 
-public class MaterialLoad extends AppCompatActivity implements View.OnClickListener {
+public class MaterialDefine extends AppCompatActivity implements View.OnClickListener {
   private static final String TAG = "MATERIAL_LOAD";
 
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.material_load_layout);
+    setContentView(R.layout.material_define_layout);
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     final View recButton = findViewById(R.id.rectImage);
@@ -28,6 +27,7 @@ public class MaterialLoad extends AppCompatActivity implements View.OnClickListe
     final View ibeamButton = findViewById(R.id.ibeamImage);
     final View channelButton = findViewById(R.id.channelImage);
     final View doubleangleButton = findViewById(R.id.doubleangleImage);
+    final View customButton = findViewById(R.id.customImage);
 
     recButton.setOnClickListener(this);
     circButton.setOnClickListener(this);
@@ -36,6 +36,7 @@ public class MaterialLoad extends AppCompatActivity implements View.OnClickListe
     ibeamButton.setOnClickListener(this);
     channelButton.setOnClickListener(this);
     doubleangleButton.setOnClickListener(this);
+    customButton.setOnClickListener(this);
   }
 
   @Override
@@ -77,6 +78,10 @@ public class MaterialLoad extends AppCompatActivity implements View.OnClickListe
       case R.id.doubleangleImage:
         Intent doubleangleScreenIntent = new Intent(v.getContext(), Doubleangle.class);
         startActivity(doubleangleScreenIntent);
+        break;
+      case R.id.customImage:
+        Intent customScreenIntent = new Intent(v.getContext(), SectionCustom.class);
+        startActivity(customScreenIntent);
         break;
       default:
         break;

@@ -96,7 +96,7 @@ public class ViewMaterialsActivity extends AppCompatActivity {
     fab.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        Intent toDefineActivity = new Intent(ViewMaterialsActivity.this, MaterialDefineActivity.class);
+        Intent toDefineActivity = new Intent(ViewMaterialsActivity.this, SectionCustom.class);
         startActivity(toDefineActivity);
       }
     });

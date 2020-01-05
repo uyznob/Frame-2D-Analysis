@@ -40,7 +40,7 @@ public class Circle extends Activity {
                 dText = dEditText.getText().toString();
                 if ((dText.matches("")) ||
                         (Double.parseDouble(dText) <= 0)) {
-                    Toast.makeText(Circle.this, "Hãy nhập lại", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Circle.this, R.string.reinput, Toast.LENGTH_SHORT).show();
                     return;
                 }
                 d = Double.parseDouble(dText);
@@ -49,8 +49,6 @@ public class Circle extends Activity {
                 areaEditText.setText(area.toString());
                 ix = ix2(d);
                 ixEditText.setText(ix.toString());
-                iy = iy2(d);
-                iyEditText.setText(iy.toString());
             }
         });
     }

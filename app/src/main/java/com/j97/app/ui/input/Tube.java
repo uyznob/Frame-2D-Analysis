@@ -45,7 +45,7 @@ public class Tube extends Activity {
                 tText = tEditText.getText().toString();
                 if ((hText.matches("") || wText.matches("") || tText.matches("")) ||
                         (Double.parseDouble(hText) <= 0 || Double.parseDouble(wText) <= 0 || Double.parseDouble(tText) <= 0)) {
-                    Toast.makeText(Tube.this, "Hãy nhập lại", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Tube.this, R.string.reinput, Toast.LENGTH_SHORT).show();
                     return;
                 }
                 h = Double.parseDouble(hText);
@@ -56,8 +56,6 @@ public class Tube extends Activity {
                 areaEditText.setText(area.toString());
                 ix = ix4(h, w, t);
                 ixEditText.setText(ix.toString());
-                iy = iy4(h, w, t);
-                iyEditText.setText(iy.toString());
             }
         });
     }

@@ -37,9 +37,7 @@ public class Doubleangle extends Activity {
         dEditText = findViewById(R.id.dEditText);
         tEditText = findViewById(R.id.tEditText);
         areaEditText = findViewById(R.id.areaEditText);
-        ixEditText = findViewById(R.id.ixEditText);
         ixgEditText = findViewById(R.id.ixgEditText);
-        ygEditText = findViewById(R.id.ygEditText);
         // Set up button as in layout
         Button calcButton = findViewById(R.id.calcButton);
         calcButton.setOnClickListener(new View.OnClickListener() {
@@ -52,7 +50,7 @@ public class Doubleangle extends Activity {
                 tText = tEditText.getText().toString();
                 if ((hText.matches("") || wText.matches("") || dText.matches("") || tText.matches("")) ||
                         (Double.parseDouble(hText) <= 0 || Double.parseDouble(wText) <= 0 || Double.parseDouble(dText) <= 0 || Double.parseDouble(tText) <= 0)) {
-                    Toast toast = Toast.makeText(Doubleangle.this, "Hãy nhập lại", Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(Doubleangle.this, R.string.reinput, Toast.LENGTH_SHORT);
                     toast.show();
                     return;
                 }
@@ -63,12 +61,6 @@ public class Doubleangle extends Activity {
                 // Calculate properties
                 area = area7(h, w, d, t);
                 areaEditText.setText(area.toString());
-                ix = ix7(h, w, d, t);
-                ixEditText.setText(ix.toString());
-                iy = iy7(h, w, d, t);
-                iyEditText.setText(iy.toString());
-                yg = yg7(h, w, d, t);
-                ygEditText.setText(yg.toString());
                 ixg = round((ix - area*yg*yg)*100.0)/100.0;
                 ixgEditText.setText(ixg.toString());
             }
