@@ -11,4 +11,5 @@
     <string name="material_define">Material define</string>
     <string name="invalid_input">Invalid input</string>
     <string name="materials">Materials</string>
+    <string name="list_of_materials">List of materials</string>
 </resources>

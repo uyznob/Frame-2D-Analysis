@@ -1,15 +1,18 @@
 package com.j97.app.ui.input;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.DiffUtil;
@@ -17,6 +20,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.j97.app.R;
 import com.j97.app.data.local.AppDatabase;
 import com.j97.app.data.local.MaterialModel;
@@ -26,9 +30,10 @@ import java.text.NumberFormat;
 import java.util.List;
 
 class MaterialAdapter extends ListAdapter<MaterialModel, MaterialAdapter.VH> {
+  private final Listener listener;
   private final NumberFormat numberFormat = new DecimalFormat("#.##");
 
-  protected MaterialAdapter() {
+  protected MaterialAdapter(Listener listener) {
     super(new DiffUtil.ItemCallback<MaterialModel>() {
       @Override
       public boolean areItemsTheSame(@NonNull MaterialModel oldItem, @NonNull MaterialModel newItem) {
@@ -40,6 +45,7 @@ class MaterialAdapter extends ListAdapter<MaterialModel, MaterialAdapter.VH> {
         return oldItem.equals(newItem);
       }
     });
+    this.listener = listener;
   }
 
   @NonNull
@@ -55,13 +61,15 @@ class MaterialAdapter extends ListAdapter<MaterialModel, MaterialAdapter.VH> {
     holder.bind(getItem(position), position);
   }
 
-  public class VH extends RecyclerView.ViewHolder {
+  public class VH extends RecyclerView.ViewHolder implements View.OnClickListener {
 
     private final TextView textViewID;
     private final TextView textViewType;
     private final TextView textViewE;
     private final TextView textViewA;
     private final TextView textViewI;
+    private final ImageView imageEdit;
+    private final ImageView imageDelete;
 
     public VH(@NonNull View itemView) {
       super(itemView);
@@ -70,6 +78,11 @@ class MaterialAdapter extends ListAdapter<MaterialModel, MaterialAdapter.VH> {
       textViewE = itemView.findViewById(R.id.textViewE);
       textViewA = itemView.findViewById(R.id.textViewA);
       textViewI = itemView.findViewById(R.id.textViewI);
+      imageEdit = itemView.findViewById(R.id.imageEdit);
+      imageDelete = itemView.findViewById(R.id.imageDelete);
+
+      imageEdit.setOnClickListener(this);
+      imageDelete.setOnClickListener(this);
     }
 
     public void bind(MaterialModel item, int index) {
@@ -80,10 +93,31 @@ class MaterialAdapter extends ListAdapter<MaterialModel, MaterialAdapter.VH> {
       textViewA.setText(numberFormat.format(item.getA()));
       textViewI.setText(numberFormat.format(item.getI()));
     }
+
+    @Override
+    public void onClick(View v) {
+      int adapterPosition = getAdapterPosition();
+      if (adapterPosition == RecyclerView.NO_POSITION) {
+        return;
+      }
+      MaterialModel item = getItem(adapterPosition);
+
+      if (v.getId() == R.id.imageEdit) {
+        listener.edit(item);
+      } else if (v.getId() == R.id.imageDelete) {
+        listener.delete(item);
+      }
+    }
+  }
+
+  public interface Listener {
+    void delete(MaterialModel materialModel);
+
+    void edit(MaterialModel materialModel);
   }
 }
 
-public class ViewMaterialsActivity extends AppCompatActivity {
+public class ViewMaterialsActivity extends AppCompatActivity implements MaterialAdapter.Listener {
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -91,19 +125,27 @@ public class ViewMaterialsActivity extends AppCompatActivity {
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     RecyclerView recyclerView = findViewById(R.id.recycler_view);
-    View fab = findViewById(R.id.fab);
+    FloatingActionButton fab = findViewById(R.id.fab);
 
-    fab.setOnClickListener(new View.OnClickListener() {
+    fab.setOnClickListener(v -> {
+      Intent toDefineActivity = new Intent(ViewMaterialsActivity.this, MaterialDefineActivity.class);
+      startActivity(toDefineActivity);
+    });
+    recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
       @Override
-      public void onClick(View v) {
-        Intent toDefineActivity = new Intent(ViewMaterialsActivity.this, MaterialDefineActivity.class);
-        startActivity(toDefineActivity);
+      public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+        super.onScrolled(recyclerView, dx, dy);
+        if (dy > 0) {
+          fab.hide();
+        } else {
+          fab.show();
+        }
       }
     });
     recyclerView.setHasFixedSize(true);
     recyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
 
-    final MaterialAdapter adapter = new MaterialAdapter();
+    final MaterialAdapter adapter = new MaterialAdapter(this);
     recyclerView.setAdapter(adapter);
 
     AppDatabase
@@ -126,5 +168,25 @@ public class ViewMaterialsActivity extends AppCompatActivity {
       return true;
     }
     return super.onOptionsItemSelected(item);
+  }
+
+  @Override
+  public void delete(MaterialModel materialModel) {
+    new AlertDialog.Builder(this)
+        .setTitle("Delete")
+        .setMessage("Delete " + materialModel.getType())
+        .setPositiveButton("OK", (dialog, __) -> {
+          dialog.dismiss();
+          AppDatabase.getDatabase(this)
+              .materialDao()
+              .delete(materialModel);
+        })
+        .setNegativeButton("Cancel", (dialog, __) -> dialog.dismiss())
+        .show();
+  }
+
+  @Override
+  public void edit(MaterialModel materialModel) {
+
   }
 }
