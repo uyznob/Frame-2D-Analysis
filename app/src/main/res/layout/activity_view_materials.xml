@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/noto_sans"
             android:padding="8dp"
-            android:text="List of materials"
+            android:text="@string/list_of_materials"
             android:textColor="#242424"
             android:textSize="@dimen/header_size" />
 
