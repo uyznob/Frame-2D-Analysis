@@ -3,6 +3,7 @@ package com.j97.app.ui.input;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -19,6 +20,7 @@ public class SectionCustom extends AppCompatActivity implements View.OnClickList
   private EditText editTextA;
   private EditText editTextE;
   private EditText editTextI;
+  private MaterialModel materialModel;
 
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -26,11 +28,19 @@ public class SectionCustom extends AppCompatActivity implements View.OnClickList
     setContentView(R.layout.section_custom_layout);
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-    findViewById(R.id.section_custom_save).setOnClickListener(this);
-
+    Button buttonSave = findViewById(R.id.section_custom_save);
+    buttonSave.setOnClickListener(this);
     editTextA = findViewById(R.id.editTextA);
     editTextE = findViewById(R.id.editTextE);
     editTextI = findViewById(R.id.editTextI);
+
+    materialModel = getIntent().getParcelableExtra("item");
+    if (materialModel != null) {
+      editTextA.setText(String.valueOf(materialModel.getA()));
+      editTextE.setText(String.valueOf(materialModel.getE()));
+      editTextI.setText(String.valueOf(materialModel.getI()));
+      buttonSave.setText(R.string.submit_edit);
+    }
   }
 
   @Override
@@ -71,11 +81,22 @@ public class SectionCustom extends AppCompatActivity implements View.OnClickList
       return;
     }
 
-    MaterialModel materialModel = new MaterialModel(1, "custom", e, a, i);
-    AppDatabase.getDatabase(this)
-        .materialDao()
-        .insert(materialModel);
-    Toast.makeText(this, R.string.insert_success, Toast.LENGTH_SHORT).show();
-    finish();
+    if (materialModel == null) {
+      MaterialModel materialModel = new MaterialModel(1, "custom", e, a, i);
+      AppDatabase.getDatabase(this)
+          .materialDao()
+          .insert(materialModel);
+      Toast.makeText(this, R.string.insert_success, Toast.LENGTH_SHORT).show();
+      finish();
+    } else {
+      materialModel.setA(a);
+      materialModel.setE(e);
+      materialModel.setI(i);
+      AppDatabase.getDatabase(this)
+          .materialDao()
+          .update(materialModel);
+      Toast.makeText(this, R.string.update_success, Toast.LENGTH_SHORT).show();
+      finish();
+    }
   }
 }

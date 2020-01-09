@@ -1,5 +1,8 @@
 package com.j97.app.data.local;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -8,7 +11,7 @@ import java.util.Date;
 import java.util.Objects;
 
 @Entity(tableName = "material_models")
-public class MaterialModel {
+public class MaterialModel implements Parcelable {
   @PrimaryKey(autoGenerate = true)
   @ColumnInfo(name = "_id")
   private int id;
@@ -36,6 +39,44 @@ public class MaterialModel {
     this.I = i;
     this.createdAt = new Date();
   }
+
+  protected MaterialModel(Parcel in) {
+    id = in.readInt();
+    materialId = in.readInt();
+    A = in.readDouble();
+    E = in.readDouble();
+    I = in.readDouble();
+    type = in.readString();
+    createdAt = new Date(in.readLong());
+  }
+
+  @Override
+  public void writeToParcel(Parcel dest, int flags) {
+    dest.writeInt(id);
+    dest.writeInt(materialId);
+    dest.writeDouble(A);
+    dest.writeDouble(E);
+    dest.writeDouble(I);
+    dest.writeString(type);
+    dest.writeLong(createdAt.getTime());
+  }
+
+  @Override
+  public int describeContents() {
+    return 0;
+  }
+
+  public static final Creator<MaterialModel> CREATOR = new Creator<MaterialModel>() {
+    @Override
+    public MaterialModel createFromParcel(Parcel in) {
+      return new MaterialModel(in);
+    }
+
+    @Override
+    public MaterialModel[] newArray(int size) {
+      return new MaterialModel[size];
+    }
+  };
 
   public int getId() {
     return id;

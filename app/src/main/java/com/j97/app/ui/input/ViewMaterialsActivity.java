@@ -150,14 +150,7 @@ public class ViewMaterialsActivity extends AppCompatActivity implements Material
     AppDatabase
         .getDatabase(this).materialDao()
         .getAllMaterialModels()
-        .observe(this, new Observer<List<MaterialModel>>() {
-          @Override
-          public void onChanged(List<MaterialModel> materialModels) {
-            adapter.submitList(materialModels);
-          }
-        });
-
-
+        .observe(this, adapter::submitList);
   }
 
   @Override
@@ -186,6 +179,8 @@ public class ViewMaterialsActivity extends AppCompatActivity implements Material
 
   @Override
   public void edit(MaterialModel materialModel) {
-
+    Intent intent = new Intent(this, SectionCustom.class);
+    intent.putExtra("item", materialModel);
+    startActivity(intent);
   }
 }
