@@ -1,7 +1,6 @@
 package com.j97.app.ui.input;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,21 +9,21 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
-import com.j97.app.MainActivity;
 import com.j97.app.R;
+import com.j97.app.data.local.AppDatabase;
+import com.j97.app.data.local.MaterialModel;
 
 import static java.lang.Math.round;
 
 import static  com.j97.app.Utils.area7;
 import static  com.j97.app.Utils.ix7;
-import static  com.j97.app.Utils.iy7;
 
 public class Doubleangle extends Activity {
     private int i;
     private double sum;
     private String hText, wText, dText, tText;
-    private Double h, w, d, t, area, ix, iy,ixg, yg;
-    private EditText hEditText, wEditText, dEditText, tEditText, areaEditText, ixEditText, iyEditText, ixgEditText, ygEditText;
+    private Double h, w, d, t, area, ix, iy, ixg, yg;
+    private EditText hEditText, wEditText, dEditText, tEditText, areaEditText, ixEditText, ixgEditText, eEditText;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -32,11 +31,13 @@ public class Doubleangle extends Activity {
         // Set the layout
         setContentView(R.layout.doubleangle_layout);
         // Take the edit text objects
+        eEditText = findViewById(R.id.eEditText);
         hEditText = findViewById(R.id.hEditText);
         wEditText = findViewById(R.id.wEditText);
         dEditText = findViewById(R.id.dEditText);
         tEditText = findViewById(R.id.tEditText);
         areaEditText = findViewById(R.id.areaEditText);
+        ixEditText = findViewById(R.id.ixEditText);
         ixgEditText = findViewById(R.id.ixgEditText);
         // Set up button as in layout
         Button calcButton = findViewById(R.id.calcButton);
@@ -61,8 +62,57 @@ public class Doubleangle extends Activity {
                 // Calculate properties
                 area = area7(h, w, d, t);
                 areaEditText.setText(area.toString());
+                ix = ix7(h, w, d, t);
+                yg = yg7(h, w, d, t);
                 ixg = round((ix - area*yg*yg)*100.0)/100.0;
                 ixgEditText.setText(ixg.toString());
+            }
+        });
+        Button saveButton = findViewById(R.id.saveButton);
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String eText = eEditText.getText().toString();
+                String aText = areaEditText.getText().toString();
+                String iText = ixgEditText.getText().toString();
+                String hText = hEditText.getText().toString();
+                String wText = wEditText.getText().toString();
+                String dText = dEditText.getText().toString();
+                String tText = tEditText.getText().toString();
+                String typeText;
+
+                double e;
+                double a;
+                double i;
+
+                try {
+                    e = Double.parseDouble(eText);
+                } catch (NumberFormatException ignored) {
+                    Toast.makeText(Doubleangle.this, R.string.invalid_input, Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                try {
+                    a = Double.parseDouble(aText);
+                } catch (NumberFormatException ignored) {
+                    Toast.makeText(Doubleangle.this, R.string.invalid_input, Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                try {
+                    i = Double.parseDouble(iText);
+                } catch (NumberFormatException ignored) {
+                    Toast.makeText(Doubleangle.this, R.string.invalid_input, Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                typeText = "L"+hText+"x"+wText+"x"+dText+"x"+tText;
+                MaterialModel materialModel = new MaterialModel(1, typeText, e, a, i);
+                AppDatabase.getDatabase(Doubleangle.this)
+                        .materialDao()
+                        .insert(materialModel);
+                Toast.makeText(Doubleangle.this, R.string.insert_success, Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
     }
@@ -77,10 +127,4 @@ public class Doubleangle extends Activity {
         return round((2 * sum / area7(h, w, d, t)) * 100.0) / 100.0;
     } //Distance of center in the x direction
 
-    public void onBackButtonClick(View view) {
-        // Passing a Context and the Activity that we want to open
-        Intent mainScreenIntent = new Intent(this, MainActivity.class);
-        //Start activity and don't expect a result to be sent back
-        startActivity(mainScreenIntent);
-    }
 }

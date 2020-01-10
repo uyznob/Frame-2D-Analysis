@@ -12,6 +12,8 @@ import androidx.annotation.Nullable;
 
 import com.j97.app.MainActivity;
 import com.j97.app.R;
+import com.j97.app.data.local.AppDatabase;
+import com.j97.app.data.local.MaterialModel;
 
 import static  com.j97.app.Utils.area5;
 import static  com.j97.app.Utils.ix5;
@@ -21,7 +23,7 @@ import static  com.j97.app.Utils.iy5;
 public class Ibeam extends Activity {
     private String hText, wText, twText, tfText;
     private Double h, w, tw, tf, area, ix, iy;
-    private EditText hEditText, wEditText, twEditText, tfEditText, areaEditText, ixEditText, iyEditText;
+    private EditText hEditText, wEditText, twEditText, tfEditText, areaEditText, ixEditText, eEditText;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -29,6 +31,7 @@ public class Ibeam extends Activity {
         // Set the layout
         setContentView(R.layout.ibeam_layout);
         // Take the edit text objects
+        eEditText = findViewById(R.id.eEditText);
         hEditText = findViewById(R.id.hEditText);
         wEditText = findViewById(R.id.wEditText);
         twEditText = findViewById(R.id.twEditText);
@@ -62,12 +65,53 @@ public class Ibeam extends Activity {
                 ixEditText.setText(ix.toString());
             }
         });
+        Button saveButton = findViewById(R.id.saveButton);
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String eText = eEditText.getText().toString();
+                String aText = areaEditText.getText().toString();
+                String iText = ixEditText.getText().toString();
+                String hText = hEditText.getText().toString();
+                String wText = wEditText.getText().toString();
+                String twText = twEditText.getText().toString();
+                String tfText = tfEditText.getText().toString();
+                String typeText;
+
+                double e;
+                double a;
+                double i;
+
+                try {
+                    e = Double.parseDouble(eText);
+                } catch (NumberFormatException ignored) {
+                    Toast.makeText(Ibeam.this, R.string.invalid_input, Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                try {
+                    a = Double.parseDouble(aText);
+                } catch (NumberFormatException ignored) {
+                    Toast.makeText(Ibeam.this, R.string.invalid_input, Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                try {
+                    i = Double.parseDouble(iText);
+                } catch (NumberFormatException ignored) {
+                    Toast.makeText(Ibeam.this, R.string.invalid_input, Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                typeText = "I"+hText+"x"+wText+"x"+twText+"x"+tfText;
+                MaterialModel materialModel = new MaterialModel(1, typeText, e, a, i);
+                AppDatabase.getDatabase(Ibeam.this)
+                        .materialDao()
+                        .insert(materialModel);
+                Toast.makeText(Ibeam.this, R.string.insert_success, Toast.LENGTH_SHORT).show();
+                finish();
+            }
+        });
     }
 
-    public void onBackButtonClick(View view) {
-        // Passing a Context and the Activity that we want to open
-        Intent mainScreenIntent = new Intent(this, MainActivity.class);
-        //Start activity and don't expect a result to be sent back
-        startActivity(mainScreenIntent);
-    }
 }

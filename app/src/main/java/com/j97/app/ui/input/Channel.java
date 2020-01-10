@@ -1,7 +1,6 @@
 package com.j97.app.ui.input;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,7 +9,6 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
-import com.j97.app.MainActivity;
 import com.j97.app.R;
 import com.j97.app.data.local.AppDatabase;
 import com.j97.app.data.local.MaterialModel;
@@ -18,14 +16,12 @@ import com.j97.app.data.local.MaterialModel;
 import static com.j97.app.Utils.area6;
 import static com.j97.app.Utils.ix6;
 
-import static java.lang.Math.round;
-
 public class Channel extends Activity {
     private double sum;
     private String hText, wText, twText, tfText;
     private Double h, w, tw, tf, area, ix;
     private EditText hEditText, wEditText, twEditText, tfEditText, areaEditText, ixEditText;
-    private EditText editTextE;
+    private EditText eEditText;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -33,7 +29,7 @@ public class Channel extends Activity {
         // Set the layout
         setContentView(R.layout.channel_layout);
         // Take the edit text objects
-        editTextE = findViewById(R.id.editTextE);
+        eEditText = findViewById(R.id.eEditText);
         hEditText = findViewById(R.id.hEditText);
         wEditText = findViewById(R.id.wEditText);
         twEditText = findViewById(R.id.twEditText);
@@ -71,9 +67,14 @@ public class Channel extends Activity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String eText = editTextE.getText().toString();
+                String eText = eEditText.getText().toString();
                 String aText = areaEditText.getText().toString();
                 String iText = ixEditText.getText().toString();
+                String hText = hEditText.getText().toString();
+                String wText = wEditText.getText().toString();
+                String twText = twEditText.getText().toString();
+                String tfText = tfEditText.getText().toString();
+                String typeText;
 
                 double e;
                 double a;
@@ -100,7 +101,8 @@ public class Channel extends Activity {
                     return;
                 }
 
-                MaterialModel materialModel = new MaterialModel(1, "custom", e, a, i);
+                typeText = "C"+hText+"x"+wText+"x"+twText+"x"+tfText;
+                MaterialModel materialModel = new MaterialModel(1, typeText, e, a, i);
                 AppDatabase.getDatabase(Channel.this)
                         .materialDao()
                         .insert(materialModel);
@@ -110,20 +112,4 @@ public class Channel extends Activity {
         });
     }
 
-    private double xg6(double h, double w, double tw, double tf) {
-        int n = 20;
-        double e = (w - tw) / n;
-        sum = 0;
-        for (int i = 1; i <= n; i++) {
-            sum = sum + (tw / 2 + (2 * i - 1) * e / 2) * (e * tf); //integration
-        }
-        return round((2 * sum / area6(h, w, tw, tf)) * 100.0) / 100.0;
-    } //Distance of center in the x direction
-
-    public void onBackButtonClick(View view) {
-        // Passing a Context and the Activity that we want to open
-        Intent mainScreenIntent = new Intent(this, MainActivity.class);
-        //Start activity and don't expect a result to be sent back
-        startActivity(mainScreenIntent);
-    }
 }

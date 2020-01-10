@@ -1,7 +1,6 @@
 package com.j97.app.ui.input;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,17 +9,17 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
-import com.j97.app.MainActivity;
 import com.j97.app.R;
+import com.j97.app.data.local.AppDatabase;
+import com.j97.app.data.local.MaterialModel;
 
 import static  com.j97.app.Utils.area2;
 import static  com.j97.app.Utils.ix2;
-import static  com.j97.app.Utils.iy2;
 
 public class Circle extends Activity {
     private String dText;
     private Double d, area, ix, iy;
-    private EditText dEditText, areaEditText, ixEditText, iyEditText;
+    private EditText dEditText, areaEditText, ixEditText, eEditText;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -29,6 +28,7 @@ public class Circle extends Activity {
         setContentView(R.layout.circle_layout);
         // Take the edit text objects
         dEditText = findViewById(R.id.dEditText);
+        eEditText = findViewById(R.id.eEditText);
         areaEditText = findViewById(R.id.areaEditText);
         ixEditText = findViewById(R.id.ixEditText);
         // Set up button as in layout
@@ -51,12 +51,50 @@ public class Circle extends Activity {
                 ixEditText.setText(ix.toString());
             }
         });
+        Button saveButton = findViewById(R.id.saveButton);
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String eText = eEditText.getText().toString();
+                String aText = areaEditText.getText().toString();
+                String iText = ixEditText.getText().toString();
+                String dText = dEditText.getText().toString();
+                String typeText;
+
+                double e;
+                double a;
+                double i;
+
+                try {
+                    e = Double.parseDouble(eText);
+                } catch (NumberFormatException ignored) {
+                    Toast.makeText(Circle.this, R.string.invalid_input, Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                try {
+                    a = Double.parseDouble(aText);
+                } catch (NumberFormatException ignored) {
+                    Toast.makeText(Circle.this, R.string.invalid_input, Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                try {
+                    i = Double.parseDouble(iText);
+                } catch (NumberFormatException ignored) {
+                    Toast.makeText(Circle.this, R.string.invalid_input, Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                typeText = "D"+dText;
+                MaterialModel materialModel = new MaterialModel(1, typeText, e, a, i);
+                AppDatabase.getDatabase(Circle.this)
+                        .materialDao()
+                        .insert(materialModel);
+                Toast.makeText(Circle.this, R.string.insert_success, Toast.LENGTH_SHORT).show();
+                finish();
+            }
+        });
     }
 
-    public void onBackButtonClick(View view) {
-        // Passing a Context and the Activity that we want to open
-        Intent mainScreenIntent = new Intent(this, MainActivity.class);
-        //Start activity and don't expect a result to be sent back
-        startActivity(mainScreenIntent);
-    }
 }
