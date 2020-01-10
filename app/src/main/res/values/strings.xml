@@ -3,4 +3,27 @@
     <string name="title_input">Input</string>
     <string name="title_output">Output</string>
     <string name="title_note">Note</string>
+
+    <string name="tsdauvao">Input</string>
+    <string name="tsdaura">Output</string>
+    <string name="tinhtoan">Calculate</string>
+    <string name="luu">Save</string>
+    <string name="material_define">Material Custom</string>
+    <string name="invalid_input">Invalid input</string>
+    <string name="materials">Materials</string>
+    <string name="rectangle">Rectangle</string>
+    <string name="cirlce">Circle</string>
+    <string name="pipe">Pipe</string>
+    <string name="tube">Tube</string>
+    <string name="ibeam">I beam</string>
+    <string name="channel">Channel</string>
+    <string name="doubleangle">Double angle</string>
+    <string name="custom">Custom</string>
+    <string name="define">Define</string>
+    <string name="view">View</string>
+    <string name="reinput">Please check input</string>
+    <string name="insert_success">Insert successfully</string>
+    <string name="list_of_materials">List of materials</string>
+    <string name="submit_edit">Submit edit</string>
+    <string name="update_success">Update successfully</string>
 </resources>
