@@ -23,4 +23,7 @@
     <string name="view">View</string>
     <string name="reinput">Please check input</string>
     <string name="insert_success">Insert successfully</string>
+    <string name="list_of_materials">List of materials</string>
+    <string name="submit_edit">Submit edit</string>
+    <string name="update_success">Update successfully</string>
 </resources>

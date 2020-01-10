@@ -16,9 +16,9 @@ import com.j97.app.data.local.MaterialModel;
 
 public class SectionCustom extends AppCompatActivity implements View.OnClickListener {
 
-  private EditText eEditText;
-  private EditText areaEditText;
-  private EditText ixEditText;
+  private EditText editTextA;
+  private EditText editTextE;
+  private EditText editTextI;
 
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -28,9 +28,9 @@ public class SectionCustom extends AppCompatActivity implements View.OnClickList
 
     findViewById(R.id.section_custom_save).setOnClickListener(this);
 
-    eEditText = findViewById(R.id.eEditText);
-    areaEditText = findViewById(R.id.areaEditText);
-    ixEditText = findViewById(R.id.ixEditText);
+    editTextA = findViewById(R.id.areaEditText);
+    editTextE = findViewById(R.id.eEditText);
+    editTextI = findViewById(R.id.ixEditText);
   }
 
   @Override
@@ -44,10 +44,9 @@ public class SectionCustom extends AppCompatActivity implements View.OnClickList
 
   @Override
   public void onClick(View v) {
-    String eText = eEditText.getText().toString();
-    String aText = areaEditText.getText().toString();
-    String iText = ixEditText.getText().toString();
-    String typeText;
+    String aText = editTextA.getText().toString();
+    String eText = editTextE.getText().toString();
+    String iText = editTextI.getText().toString();
 
     double a;
     double e;
@@ -72,8 +71,7 @@ public class SectionCustom extends AppCompatActivity implements View.OnClickList
       return;
     }
 
-    typeText = "Custom";
-    MaterialModel materialModel = new MaterialModel(1, typeText, e, a, i);
+    MaterialModel materialModel = new MaterialModel(1, "custom", e, a, i);
     AppDatabase.getDatabase(this)
         .materialDao()
         .insert(materialModel);
