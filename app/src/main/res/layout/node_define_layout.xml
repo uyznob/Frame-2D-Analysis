@@ -44,7 +44,7 @@
                         android:layout_height="match_parent"
                         android:layout_marginBottom="32dp"
                         android:contentDescription="TODO"
-                        android:src="@drawable/rect_fig"
+                        android:src="@drawable/beam_1"
                         app:layout_constraintBottom_toBottomOf="parent" />
 
                     <TextView
@@ -91,7 +91,7 @@
                         android:layout_height="match_parent"
                         android:layout_marginBottom="32dp"
                         android:contentDescription="TODO"
-                        android:src="@drawable/circ_fig"
+                        android:src="@drawable/beam_2"
                         app:layout_constraintBottom_toBottomOf="parent" />
 
                     <TextView
@@ -143,7 +143,7 @@
                         android:layout_height="match_parent"
                         android:layout_marginBottom="32dp"
                         android:contentDescription="TODO"
-                        android:src="@drawable/pipe_fig"
+                        android:src="@drawable/beam_3"
                         app:layout_constraintBottom_toBottomOf="parent" />
 
                     <TextView
