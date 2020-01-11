@@ -63,7 +63,10 @@ public class InputFragment extends Fragment implements View.OnClickListener {
         startActivity(nodeDefineScreenIntent);
         break;
       case R.id.button_view_node:
+        Intent toViewNodes = new Intent(v.getContext(), ViewNodesActivity.class);
+        startActivity(toViewNodes);
         break;
+
       case R.id.button_define_element:
         break;
       case R.id.button_view_element:
