@@ -26,4 +26,5 @@
     <string name="list_of_materials">List of materials</string>
     <string name="submit_edit">Submit edit</string>
     <string name="update_success">Update successfully</string>
+    <string name="node">Node</string>
 </resources>

@@ -26,6 +26,11 @@
             android:theme="@style/AppTheme" />
 
         <activity
+            android:name=".ui.input.NodeDefine"
+            android:label="@string/node"
+            android:theme="@style/AppTheme" />
+
+        <activity
             android:name=".ui.input.Rectangle"
             android:label="@string/materials"
             android:theme="@style/AppTheme" />
