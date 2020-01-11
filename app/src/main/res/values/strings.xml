@@ -27,4 +27,5 @@
     <string name="submit_edit">Submit edit</string>
     <string name="update_success">Update successfully</string>
     <string name="node">Node</string>
+    <string name="list_of_nodes">List of Nodes</string>
 </resources>
