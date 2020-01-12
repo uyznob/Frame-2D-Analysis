@@ -13,7 +13,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.ListAdapter;
@@ -26,7 +25,6 @@ import com.j97.app.data.local.MaterialModel;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
-import java.util.List;
 
 class MaterialAdapter extends ListAdapter<MaterialModel, MaterialAdapter.VH> {
   private final Listener listener;
@@ -58,6 +56,12 @@ class MaterialAdapter extends ListAdapter<MaterialModel, MaterialAdapter.VH> {
   @Override
   public void onBindViewHolder(@NonNull VH holder, int position) {
     holder.bind(getItem(position), position);
+  }
+
+  public interface Listener {
+    void delete(MaterialModel materialModel);
+
+    void edit(MaterialModel materialModel);
   }
 
   public class VH extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -107,12 +111,6 @@ class MaterialAdapter extends ListAdapter<MaterialModel, MaterialAdapter.VH> {
         listener.delete(item);
       }
     }
-  }
-
-  public interface Listener {
-    void delete(MaterialModel materialModel);
-
-    void edit(MaterialModel materialModel);
   }
 }
 
@@ -179,8 +177,18 @@ public class ViewMaterialsActivity extends AppCompatActivity implements Material
 
   @Override
   public void edit(MaterialModel materialModel) {
-    Intent intent = new Intent(this, SectionCustom.class);
-    intent.putExtra("item", materialModel);
-    startActivity(intent);
+    if ("custom".equalsIgnoreCase(materialModel.getType())) {
+      Intent intent = new Intent(this, SectionCustom.class);
+      intent.putExtra("item", materialModel);
+      startActivity(intent);
+      return;
+    }
+
+    if (materialModel.getType().startsWith("R")) {
+      Intent intent = new Intent(this, RectangleActivity.class);
+      intent.putExtra("item", materialModel);
+      startActivity(intent);
+      return;
+    }
   }
 }

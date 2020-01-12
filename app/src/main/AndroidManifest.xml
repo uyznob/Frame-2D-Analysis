@@ -31,8 +31,8 @@
             android:theme="@style/AppTheme" />
 
         <activity
-            android:name=".ui.input.Rectangle"
-            android:label="@string/materials"
+            android:name=".ui.input.RectangleActivity"
+            android:label="@string/rectangle"
             android:theme="@style/AppTheme" />
 
         <activity

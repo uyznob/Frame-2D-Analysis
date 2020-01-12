@@ -52,7 +52,7 @@ public class MaterialDefine extends AppCompatActivity implements View.OnClickLis
   public void onClick(View v) {
     switch (v.getId()) {
       case R.id.rectImage:
-        Intent rectangleScreenIntent = new Intent(v.getContext(), Rectangle.class);
+        Intent rectangleScreenIntent = new Intent(v.getContext(), RectangleActivity.class);
         startActivity(rectangleScreenIntent);
         break;
       case R.id.circImage:

@@ -12,6 +12,17 @@ import java.util.Objects;
 
 @Entity(tableName = "node_models")
 public class NodeModel implements Parcelable {
+  public static final Creator<NodeModel> CREATOR = new Creator<NodeModel>() {
+    @Override
+    public NodeModel createFromParcel(Parcel in) {
+      return new NodeModel(in);
+    }
+
+    @Override
+    public NodeModel[] newArray(int size) {
+      return new NodeModel[size];
+    }
+  };
   @PrimaryKey(autoGenerate = true)
   @ColumnInfo(name = "_id")
   private int id;
@@ -33,6 +44,14 @@ public class NodeModel implements Parcelable {
     CoorX = coorX;
     CoorY = coorY;
     this.createdAt = createdAt;
+  }
+
+  protected NodeModel(Parcel in) {
+    id = in.readInt();
+    nodeId = in.readInt();
+    CoorX = in.readDouble();
+    CoorY = in.readDouble();
+    createdAt = new Date(in.readLong());
   }
 
   public int getId() {
@@ -75,14 +94,6 @@ public class NodeModel implements Parcelable {
     this.createdAt = createdAt;
   }
 
-  protected NodeModel(Parcel in) {
-    id = in.readInt();
-    nodeId = in.readInt();
-    CoorX = in.readDouble();
-    CoorY = in.readDouble();
-    createdAt = new Date(in.readLong());
-  }
-
   @Override
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeInt(id);
@@ -96,19 +107,6 @@ public class NodeModel implements Parcelable {
   public int describeContents() {
     return 0;
   }
-
-  public static final Creator<NodeModel> CREATOR = new Creator<NodeModel>() {
-    @Override
-    public NodeModel createFromParcel(Parcel in) {
-      return new NodeModel(in);
-    }
-
-    @Override
-    public NodeModel[] newArray(int size) {
-      return new NodeModel[size];
-    }
-  };
-
 
   @Override
   public boolean equals(Object o) {
@@ -133,7 +131,7 @@ public class NodeModel implements Parcelable {
         "id=" + id +
         ", nodeId=" + nodeId +
         ", Coor X=" + CoorX +
-        ", Coor Y=" + CoorY +'\'' +
+        ", Coor Y=" + CoorY + '\'' +
         ", createdAt=" + createdAt +
         '}';
   }

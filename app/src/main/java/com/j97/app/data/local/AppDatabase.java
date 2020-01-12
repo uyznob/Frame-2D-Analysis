@@ -26,9 +26,6 @@ class Converter {
 @TypeConverters({Converter.class})
 public abstract class AppDatabase extends RoomDatabase {
 
-  public abstract MaterialDao materialDao();
-  public abstract NodeDao nodeDao();
-
   private static volatile AppDatabase INSTANCE;
 
   public static AppDatabase getDatabase(final Context context) {
@@ -45,4 +42,8 @@ public abstract class AppDatabase extends RoomDatabase {
     }
     return INSTANCE;
   }
+
+  public abstract MaterialDao materialDao();
+
+  public abstract NodeDao nodeDao();
 }

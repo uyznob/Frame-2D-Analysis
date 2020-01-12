@@ -12,6 +12,17 @@ import java.util.Objects;
 
 @Entity(tableName = "material_models")
 public class MaterialModel implements Parcelable {
+  public static final Creator<MaterialModel> CREATOR = new Creator<MaterialModel>() {
+    @Override
+    public MaterialModel createFromParcel(Parcel in) {
+      return new MaterialModel(in);
+    }
+
+    @Override
+    public MaterialModel[] newArray(int size) {
+      return new MaterialModel[size];
+    }
+  };
   @PrimaryKey(autoGenerate = true)
   @ColumnInfo(name = "_id")
   private int id;
@@ -66,20 +77,12 @@ public class MaterialModel implements Parcelable {
     return 0;
   }
 
-  public static final Creator<MaterialModel> CREATOR = new Creator<MaterialModel>() {
-    @Override
-    public MaterialModel createFromParcel(Parcel in) {
-      return new MaterialModel(in);
-    }
-
-    @Override
-    public MaterialModel[] newArray(int size) {
-      return new MaterialModel[size];
-    }
-  };
-
   public int getId() {
     return id;
+  }
+
+  public void setId(int id) {
+    this.id = id;
   }
 
   public double getA() {
@@ -120,10 +123,6 @@ public class MaterialModel implements Parcelable {
 
   public void setType(String type) {
     this.type = type;
-  }
-
-  public void setId(int id) {
-    this.id = id;
   }
 
   public Date getCreatedAt() {
