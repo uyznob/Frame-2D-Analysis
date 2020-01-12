@@ -3,6 +3,7 @@ package com.j97.app.ui.input.node;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -10,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.j97.app.R;
 
-public class NodeDefine extends AppCompatActivity {
+public class NodeDefineActivity extends AppCompatActivity {
   private static final String TAG = "MATERIAL_LOAD";
 
   ListView listViewNode;
@@ -46,6 +47,9 @@ public class NodeDefine extends AppCompatActivity {
     listViewNode = findViewById(R.id.listViewNode);
     CustomNodeListView customNodeListView = new CustomNodeListView(this, nodeTemplateName, nodeTemplateDescription, nodeTemplateImageId);
     listViewNode.setAdapter(customNodeListView);
+
+    listViewNode.setOnItemClickListener((parent, view, position, id) ->
+            Toast.makeText(NodeDefineActivity.this, nodeTemplateName[position] + " clicked", Toast.LENGTH_SHORT).show());
   }
 
   @Override

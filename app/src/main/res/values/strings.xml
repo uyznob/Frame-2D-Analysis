@@ -28,4 +28,8 @@
     <string name="update_success">Update successfully</string>
     <string name="node">Node</string>
     <string name="list_of_nodes">List of Nodes</string>
+    <string name="circle">Circle</string>
+    <string name="coordinate_x">Coordinate X (m)</string>
+    <string name="coordinate_y">Coordinate Y (m)</string>
+    <string name="add">Add</string>
 </resources>

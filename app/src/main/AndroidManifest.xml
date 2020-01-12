@@ -26,7 +26,7 @@
             android:theme="@style/AppTheme" />
 
         <activity
-            android:name=".ui.input.node.NodeDefine"
+            android:name=".ui.input.node.NodeDefineActivity"
             android:label="@string/node"
             android:theme="@style/AppTheme" />
 
@@ -37,32 +37,32 @@
 
         <activity
             android:name=".ui.input.material.CircleActivity"
-            android:label="@string/materials"
+            android:label="@string/circle"
             android:theme="@style/AppTheme" />
 
         <activity
             android:name=".ui.input.material.PipeActivity"
-            android:label="@string/materials"
+            android:label="@string/pipe"
             android:theme="@style/AppTheme" />
 
         <activity
             android:name=".ui.input.material.TubeActivity"
-            android:label="@string/materials"
+            android:label="@string/tube"
             android:theme="@style/AppTheme" />
 
         <activity
             android:name=".ui.input.material.IbeamActivity"
-            android:label="@string/materials"
+            android:label="@string/ibeam"
             android:theme="@style/AppTheme" />
 
         <activity
             android:name=".ui.input.material.ChannelActivity"
-            android:label="@string/materials"
+            android:label="@string/channel"
             android:theme="@style/AppTheme" />
 
         <activity
             android:name=".ui.input.material.DoubleAngleActivity"
-            android:label="@string/materials"
+            android:label="@string/doubleangle"
             android:theme="@style/AppTheme" />
 
         <activity

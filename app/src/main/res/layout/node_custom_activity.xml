@@ -18,7 +18,7 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Elastic modulus (E)"
+            android:text="@string/coordinate_x"
             android:textAlignment="viewStart"
             android:textSize="@dimen/text_size"
             app:layout_constraintBottom_toBottomOf="@+id/eEditText"
@@ -29,24 +29,14 @@
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Section area (A cm^2)"
+            android:text="@string/coordinate_y"
             android:textSize="@dimen/text_size"
-            app:layout_constraintBottom_toBottomOf="@+id/areaEditText"
+            app:layout_constraintBottom_toBottomOf="@+id/etCoorY"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/areaEditText" />
-
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Moment inertia (I cm^4)"
-            android:textSize="@dimen/text_size"
-            app:layout_constraintBottom_toBottomOf="@+id/ixEditText"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/ixEditText" />
+            app:layout_constraintTop_toTopOf="@+id/etCoorY" />
 
         <EditText
-            android:id="@+id/eEditText"
+            android:id="@+id/etCoorX"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
@@ -57,7 +47,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/areaEditText"
+            android:id="@+id/etCoorY"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -66,38 +56,24 @@
             android:inputType="numberDecimal"
             android:textSize="@dimen/text_size"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/eEditText" />
-
-        <EditText
-            android:id="@+id/ixEditText"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
-            android:ems="10"
-            android:inputType="numberDecimal"
-            android:textSize="@dimen/text_size"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/areaEditText" />
+            app:layout_constraintTop_toBottomOf="@+id/etCoorX" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/section_custom_save"
+            android:id="@+id/node_custom_add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="32dp"
-            android:layout_marginBottom="8dp"
             android:backgroundTint="@color/colorAccent"
             android:fontFamily="@font/noto_sans"
             android:padding="18dp"
-            android:text="@string/luu"
+            android:text="@string/add"
             app:cornerRadius="24dp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_bias="0.576"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ixEditText" />
+            app:layout_constraintTop_toBottomOf="@+id/etCoorY" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

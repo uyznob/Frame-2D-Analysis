@@ -1,11 +1,13 @@
 package com.j97.app.ui.input.material;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -27,6 +29,8 @@ public class TubeActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     // Set the layout
     setContentView(R.layout.tube_activity);
+    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
     // Take the edit text objects
     eEditText = findViewById(R.id.eEditText);
     hEditText = findViewById(R.id.hEditText);
@@ -108,4 +112,13 @@ public class TubeActivity extends AppCompatActivity {
     });
   }
 
+
+  @Override
+  public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+    if (item.getItemId() == android.R.id.home) {
+      finish();
+      return true;
+    }
+    return super.onOptionsItemSelected(item);
+  }
 }

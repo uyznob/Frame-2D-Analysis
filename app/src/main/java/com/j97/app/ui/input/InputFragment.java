@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,7 +15,7 @@ import androidx.fragment.app.Fragment;
 import com.j97.app.R;
 import com.j97.app.ui.input.material.MaterialDefineActivity;
 import com.j97.app.ui.input.material.ViewMaterialsActivity;
-import com.j97.app.ui.input.node.NodeDefine;
+import com.j97.app.ui.input.node.NodeDefineActivity;
 import com.j97.app.ui.input.node.ViewNodesActivity;
 
 public class InputFragment extends Fragment implements View.OnClickListener {
@@ -30,14 +31,14 @@ public class InputFragment extends Fragment implements View.OnClickListener {
     final Button buttonDefineMaterial = view.findViewById(R.id.button_define_material);
     final Button buttonViewMaterial = view.findViewById(R.id.button_view_material);
     final Button buttonDefineNode = view.findViewById(R.id.button_define_node);
-
-    final Button buttonViewNode = view.findViewById(R.id.button_define_node);
+    final Button buttonViewNode = view.findViewById(R.id.button_view_node);
+    
     final Button buttonDefineElement = view.findViewById(R.id.button_define_element);
-    final Button buttonViewElement = view.findViewById(R.id.button_define_element);
+    final Button buttonViewElement = view.findViewById(R.id.button_view_element);
     final Button buttonDefineForce = view.findViewById(R.id.button_define_force);
-    final Button buttonViewForce = view.findViewById(R.id.button_define_force);
+    final Button buttonViewForce = view.findViewById(R.id.button_view_force);
     final Button buttonDefineBoundary = view.findViewById(R.id.button_define_boundary);
-    final Button buttonViewBoundary = view.findViewById(R.id.button_define_boundary);
+    final Button buttonViewBoundary = view.findViewById(R.id.button_view_boundary);
 
     buttonDefineMaterial.setOnClickListener(this);
     buttonViewMaterial.setOnClickListener(this);
@@ -63,7 +64,7 @@ public class InputFragment extends Fragment implements View.OnClickListener {
         startActivity(toViewMaterials);
         break;
       case R.id.button_define_node:
-        Intent nodeDefineScreenIntent = new Intent(v.getContext(), NodeDefine.class);
+        Intent nodeDefineScreenIntent = new Intent(v.getContext(), NodeDefineActivity.class);
         startActivity(nodeDefineScreenIntent);
         break;
       case R.id.button_view_node:
