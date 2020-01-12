@@ -38,12 +38,11 @@ public class NodeModel implements Parcelable {
   public NodeModel() {
   }
 
-  public NodeModel(int id, int nodeId, double coorX, double coorY) {
-    this.id = id;
+  public NodeModel(int nodeId, double coorX, double coorY) {
     this.nodeId = nodeId;
     CoorX = coorX;
     CoorY = coorY;
-    this.createdAt = createdAt;
+    this.createdAt = new Date();
   }
 
   protected NodeModel(Parcel in) {
