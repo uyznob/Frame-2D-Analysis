@@ -22,7 +22,7 @@ class Converter {
   }
 }
 
-@Database(entities = {MaterialModel.class, NodeModel.class}, version = 2, exportSchema = false)
+@Database(entities = {MaterialModel.class, NodeModel.class}, version = 1, exportSchema = false)
 @TypeConverters({Converter.class})
 public abstract class AppDatabase extends RoomDatabase {
 
