@@ -1,4 +1,4 @@
-package com.j97.app.ui.input;
+package com.j97.app.ui.input.material;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,13 +11,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.j97.app.R;
 
-public class MaterialDefine extends AppCompatActivity implements View.OnClickListener {
-  private static final String TAG = "MATERIAL_LOAD";
+public class MaterialDefineActivity extends AppCompatActivity implements View.OnClickListener {
 
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.material_define_layout);
+    setContentView(R.layout.material_define_activity);
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     final View recButton = findViewById(R.id.rectImage);
@@ -56,31 +55,31 @@ public class MaterialDefine extends AppCompatActivity implements View.OnClickLis
         startActivity(rectangleScreenIntent);
         break;
       case R.id.circImage:
-        Intent circleScreenIntent = new Intent(v.getContext(), Circle.class);
+        Intent circleScreenIntent = new Intent(v.getContext(), CircleActivity.class);
         startActivity(circleScreenIntent);
         break;
       case R.id.pipeImage:
-        Intent pipeScreenIntent = new Intent(v.getContext(), Pipe.class);
+        Intent pipeScreenIntent = new Intent(v.getContext(), PipeActivity.class);
         startActivity(pipeScreenIntent);
         break;
       case R.id.tubeImage:
-        Intent tubeScreenIntent = new Intent(v.getContext(), Tube.class);
+        Intent tubeScreenIntent = new Intent(v.getContext(), TubeActivity.class);
         startActivity(tubeScreenIntent);
         break;
       case R.id.ibeamImage:
-        Intent ibeamScreenIntent = new Intent(v.getContext(), Ibeam.class);
+        Intent ibeamScreenIntent = new Intent(v.getContext(), IbeamActivity.class);
         startActivity(ibeamScreenIntent);
         break;
       case R.id.channelImage:
-        Intent channelScreenIntent = new Intent(v.getContext(), Channel.class);
+        Intent channelScreenIntent = new Intent(v.getContext(), ChannelActivity.class);
         startActivity(channelScreenIntent);
         break;
       case R.id.doubleangleImage:
-        Intent doubleangleScreenIntent = new Intent(v.getContext(), Doubleangle.class);
+        Intent doubleangleScreenIntent = new Intent(v.getContext(), DoubleAngleActivity.class);
         startActivity(doubleangleScreenIntent);
         break;
       case R.id.customImage:
-        Intent customScreenIntent = new Intent(v.getContext(), SectionCustom.class);
+        Intent customScreenIntent = new Intent(v.getContext(), SectionCustomActivity.class);
         startActivity(customScreenIntent);
         break;
       default:

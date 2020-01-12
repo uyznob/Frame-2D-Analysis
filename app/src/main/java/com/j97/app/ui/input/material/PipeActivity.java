@@ -1,4 +1,4 @@
-package com.j97.app.ui.input;
+package com.j97.app.ui.input.material;
 
 import android.os.Bundle;
 import android.view.View;
@@ -16,7 +16,7 @@ import com.j97.app.data.local.MaterialModel;
 import static com.j97.app.Utils.area3;
 import static com.j97.app.Utils.ix3;
 
-public class Pipe extends AppCompatActivity {
+public class PipeActivity extends AppCompatActivity {
   private String dText, tText;
   private Double d, t, area, ix, iy;
   private EditText dEditText, tEditText, areaEditText, ixEditText, eEditText;
@@ -25,7 +25,7 @@ public class Pipe extends AppCompatActivity {
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     // Set the layout
-    setContentView(R.layout.pipe_layout);
+    setContentView(R.layout.pipe_activity);
     // Take the edit text objects
     eEditText = findViewById(R.id.eEditText);
     dEditText = findViewById(R.id.dEditText);
@@ -42,7 +42,7 @@ public class Pipe extends AppCompatActivity {
         tText = tEditText.getText().toString();
         if ((dText.matches("") || tText.matches("")) ||
             (Double.parseDouble(dText) <= 0 || Double.parseDouble(tText) <= 0)) {
-          Toast.makeText(Pipe.this, R.string.reinput, Toast.LENGTH_SHORT).show();
+          Toast.makeText(PipeActivity.this, R.string.reinput, Toast.LENGTH_SHORT).show();
           return;
         }
         d = Double.parseDouble(dText);
@@ -73,30 +73,30 @@ public class Pipe extends AppCompatActivity {
         try {
           e = Double.parseDouble(eText);
         } catch (NumberFormatException ignored) {
-          Toast.makeText(Pipe.this, R.string.invalid_input, Toast.LENGTH_SHORT).show();
+          Toast.makeText(PipeActivity.this, R.string.invalid_input, Toast.LENGTH_SHORT).show();
           return;
         }
 
         try {
           a = Double.parseDouble(aText);
         } catch (NumberFormatException ignored) {
-          Toast.makeText(Pipe.this, R.string.invalid_input, Toast.LENGTH_SHORT).show();
+          Toast.makeText(PipeActivity.this, R.string.invalid_input, Toast.LENGTH_SHORT).show();
           return;
         }
 
         try {
           i = Double.parseDouble(iText);
         } catch (NumberFormatException ignored) {
-          Toast.makeText(Pipe.this, R.string.invalid_input, Toast.LENGTH_SHORT).show();
+          Toast.makeText(PipeActivity.this, R.string.invalid_input, Toast.LENGTH_SHORT).show();
           return;
         }
 
         typeText = "P" + dText + "x" + tText;
         MaterialModel materialModel = new MaterialModel(1, typeText, e, a, i);
-        AppDatabase.getDatabase(Pipe.this)
+        AppDatabase.getDatabase(PipeActivity.this)
             .materialDao()
             .insert(materialModel);
-        Toast.makeText(Pipe.this, R.string.insert_success, Toast.LENGTH_SHORT).show();
+        Toast.makeText(PipeActivity.this, R.string.insert_success, Toast.LENGTH_SHORT).show();
         finish();
       }
     });

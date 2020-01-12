@@ -1,4 +1,4 @@
-package com.j97.app.ui.input;
+package com.j97.app.ui.input.node;
 
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -46,8 +46,6 @@ public class NodeDefine extends AppCompatActivity {
     listViewNode = findViewById(R.id.listViewNode);
     CustomNodeListView customNodeListView = new CustomNodeListView(this, nodeTemplateName, nodeTemplateDescription, nodeTemplateImageId);
     listViewNode.setAdapter(customNodeListView);
-
-
   }
 
   @Override

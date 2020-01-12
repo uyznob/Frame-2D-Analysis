@@ -1,4 +1,4 @@
-package com.j97.app.ui.input;
+package com.j97.app.ui.input.material;
 
 import android.os.Bundle;
 import android.view.View;
@@ -16,7 +16,7 @@ import com.j97.app.data.local.MaterialModel;
 import static com.j97.app.Utils.area2;
 import static com.j97.app.Utils.ix2;
 
-public class Circle extends AppCompatActivity {
+public class CircleActivity extends AppCompatActivity {
   private String dText;
   private Double d, area, ix, iy;
   private EditText dEditText, areaEditText, ixEditText, eEditText;
@@ -25,7 +25,7 @@ public class Circle extends AppCompatActivity {
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     // Set the layout
-    setContentView(R.layout.circle_layout);
+    setContentView(R.layout.circle_activity);
     // Take the edit text objects
     dEditText = findViewById(R.id.dEditText);
     eEditText = findViewById(R.id.eEditText);
@@ -40,7 +40,7 @@ public class Circle extends AppCompatActivity {
         dText = dEditText.getText().toString();
         if ((dText.matches("")) ||
             (Double.parseDouble(dText) <= 0)) {
-          Toast.makeText(Circle.this, R.string.reinput, Toast.LENGTH_SHORT).show();
+          Toast.makeText(CircleActivity.this, R.string.reinput, Toast.LENGTH_SHORT).show();
           return;
         }
         d = Double.parseDouble(dText);
@@ -68,30 +68,30 @@ public class Circle extends AppCompatActivity {
         try {
           e = Double.parseDouble(eText);
         } catch (NumberFormatException ignored) {
-          Toast.makeText(Circle.this, R.string.invalid_input, Toast.LENGTH_SHORT).show();
+          Toast.makeText(CircleActivity.this, R.string.invalid_input, Toast.LENGTH_SHORT).show();
           return;
         }
 
         try {
           a = Double.parseDouble(aText);
         } catch (NumberFormatException ignored) {
-          Toast.makeText(Circle.this, R.string.invalid_input, Toast.LENGTH_SHORT).show();
+          Toast.makeText(CircleActivity.this, R.string.invalid_input, Toast.LENGTH_SHORT).show();
           return;
         }
 
         try {
           i = Double.parseDouble(iText);
         } catch (NumberFormatException ignored) {
-          Toast.makeText(Circle.this, R.string.invalid_input, Toast.LENGTH_SHORT).show();
+          Toast.makeText(CircleActivity.this, R.string.invalid_input, Toast.LENGTH_SHORT).show();
           return;
         }
 
         typeText = "D" + dText;
         MaterialModel materialModel = new MaterialModel(1, typeText, e, a, i);
-        AppDatabase.getDatabase(Circle.this)
+        AppDatabase.getDatabase(CircleActivity.this)
             .materialDao()
             .insert(materialModel);
-        Toast.makeText(Circle.this, R.string.insert_success, Toast.LENGTH_SHORT).show();
+        Toast.makeText(CircleActivity.this, R.string.insert_success, Toast.LENGTH_SHORT).show();
         finish();
       }
     });

@@ -1,4 +1,4 @@
-package com.j97.app.ui.input;
+package com.j97.app.ui.input.material;
 
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -14,7 +14,7 @@ import com.j97.app.R;
 import com.j97.app.data.local.AppDatabase;
 import com.j97.app.data.local.MaterialModel;
 
-public class SectionCustom extends AppCompatActivity implements View.OnClickListener {
+public class SectionCustomActivity extends AppCompatActivity implements View.OnClickListener {
 
   private EditText editTextA;
   private EditText editTextE;
@@ -23,7 +23,7 @@ public class SectionCustom extends AppCompatActivity implements View.OnClickList
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.section_custom_layout);
+    setContentView(R.layout.section_custom_activity);
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     findViewById(R.id.section_custom_save).setOnClickListener(this);

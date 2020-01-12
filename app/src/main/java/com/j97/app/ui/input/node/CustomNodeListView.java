@@ -1,4 +1,4 @@
-package com.j97.app.ui.input;
+package com.j97.app.ui.input.node;
 
 import android.app.Activity;
 import android.view.LayoutInflater;

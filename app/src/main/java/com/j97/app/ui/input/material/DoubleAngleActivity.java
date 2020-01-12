@@ -1,4 +1,4 @@
-package com.j97.app.ui.input;
+package com.j97.app.ui.input.material;
 
 import android.os.Bundle;
 import android.view.View;
@@ -17,7 +17,7 @@ import static com.j97.app.Utils.area7;
 import static com.j97.app.Utils.ix7;
 import static java.lang.Math.round;
 
-public class Doubleangle extends AppCompatActivity {
+public class DoubleAngleActivity extends AppCompatActivity {
   private int i;
   private double sum;
   private String hText, wText, dText, tText;
@@ -28,7 +28,7 @@ public class Doubleangle extends AppCompatActivity {
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     // Set the layout
-    setContentView(R.layout.doubleangle_layout);
+    setContentView(R.layout.doubleangle_activity);
     // Take the edit text objects
     eEditText = findViewById(R.id.eEditText);
     hEditText = findViewById(R.id.hEditText);
@@ -50,7 +50,7 @@ public class Doubleangle extends AppCompatActivity {
         tText = tEditText.getText().toString();
         if ((hText.matches("") || wText.matches("") || dText.matches("") || tText.matches("")) ||
             (Double.parseDouble(hText) <= 0 || Double.parseDouble(wText) <= 0 || Double.parseDouble(dText) <= 0 || Double.parseDouble(tText) <= 0)) {
-          Toast toast = Toast.makeText(Doubleangle.this, R.string.reinput, Toast.LENGTH_SHORT);
+          Toast toast = Toast.makeText(DoubleAngleActivity.this, R.string.reinput, Toast.LENGTH_SHORT);
           toast.show();
           return;
         }
@@ -87,30 +87,30 @@ public class Doubleangle extends AppCompatActivity {
         try {
           e = Double.parseDouble(eText);
         } catch (NumberFormatException ignored) {
-          Toast.makeText(Doubleangle.this, R.string.invalid_input, Toast.LENGTH_SHORT).show();
+          Toast.makeText(DoubleAngleActivity.this, R.string.invalid_input, Toast.LENGTH_SHORT).show();
           return;
         }
 
         try {
           a = Double.parseDouble(aText);
         } catch (NumberFormatException ignored) {
-          Toast.makeText(Doubleangle.this, R.string.invalid_input, Toast.LENGTH_SHORT).show();
+          Toast.makeText(DoubleAngleActivity.this, R.string.invalid_input, Toast.LENGTH_SHORT).show();
           return;
         }
 
         try {
           i = Double.parseDouble(iText);
         } catch (NumberFormatException ignored) {
-          Toast.makeText(Doubleangle.this, R.string.invalid_input, Toast.LENGTH_SHORT).show();
+          Toast.makeText(DoubleAngleActivity.this, R.string.invalid_input, Toast.LENGTH_SHORT).show();
           return;
         }
 
         typeText = "L" + hText + "x" + wText + "x" + dText + "x" + tText;
         MaterialModel materialModel = new MaterialModel(1, typeText, e, a, i);
-        AppDatabase.getDatabase(Doubleangle.this)
+        AppDatabase.getDatabase(DoubleAngleActivity.this)
             .materialDao()
             .insert(materialModel);
-        Toast.makeText(Doubleangle.this, R.string.insert_success, Toast.LENGTH_SHORT).show();
+        Toast.makeText(DoubleAngleActivity.this, R.string.insert_success, Toast.LENGTH_SHORT).show();
         finish();
       }
     });

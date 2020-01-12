@@ -12,6 +12,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.j97.app.R;
+import com.j97.app.ui.input.material.MaterialDefineActivity;
+import com.j97.app.ui.input.material.ViewMaterialsActivity;
+import com.j97.app.ui.input.node.NodeDefine;
+import com.j97.app.ui.input.node.ViewNodesActivity;
 
 public class InputFragment extends Fragment implements View.OnClickListener {
   @Nullable
@@ -51,7 +55,7 @@ public class InputFragment extends Fragment implements View.OnClickListener {
   public void onClick(View v) {
     switch (v.getId()) {
       case R.id.button_define_material:
-        Intent materialDefineScreenIntent = new Intent(v.getContext(), MaterialDefine.class);
+        Intent materialDefineScreenIntent = new Intent(v.getContext(), MaterialDefineActivity.class);
         startActivity(materialDefineScreenIntent);
         break;
       case R.id.button_view_material:

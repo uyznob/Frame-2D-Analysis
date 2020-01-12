@@ -21,62 +21,62 @@
         </activity>
 
         <activity
-            android:name=".ui.input.MaterialDefine"
+            android:name=".ui.input.material.MaterialDefineActivity"
             android:label="@string/materials"
             android:theme="@style/AppTheme" />
 
         <activity
-            android:name=".ui.input.NodeDefine"
+            android:name=".ui.input.node.NodeDefine"
             android:label="@string/node"
             android:theme="@style/AppTheme" />
 
         <activity
-            android:name=".ui.input.RectangleActivity"
+            android:name=".ui.input.material.RectangleActivity"
             android:label="@string/rectangle"
             android:theme="@style/AppTheme" />
 
         <activity
-            android:name=".ui.input.Circle"
+            android:name=".ui.input.material.CircleActivity"
             android:label="@string/materials"
             android:theme="@style/AppTheme" />
 
         <activity
-            android:name=".ui.input.Pipe"
+            android:name=".ui.input.material.PipeActivity"
             android:label="@string/materials"
             android:theme="@style/AppTheme" />
 
         <activity
-            android:name=".ui.input.Tube"
+            android:name=".ui.input.material.TubeActivity"
             android:label="@string/materials"
             android:theme="@style/AppTheme" />
 
         <activity
-            android:name=".ui.input.Ibeam"
+            android:name=".ui.input.material.IbeamActivity"
             android:label="@string/materials"
             android:theme="@style/AppTheme" />
 
         <activity
-            android:name=".ui.input.Channel"
+            android:name=".ui.input.material.ChannelActivity"
             android:label="@string/materials"
             android:theme="@style/AppTheme" />
 
         <activity
-            android:name=".ui.input.Doubleangle"
+            android:name=".ui.input.material.DoubleAngleActivity"
             android:label="@string/materials"
             android:theme="@style/AppTheme" />
 
         <activity
-            android:name=".ui.input.SectionCustom"
+            android:name=".ui.input.material.SectionCustomActivity"
             android:label="@string/material_define"
             android:theme="@style/AppTheme" />
 
         <activity
-            android:name=".ui.input.ViewMaterialsActivity"
+            android:name=".ui.input.material.ViewMaterialsActivity"
             android:label="@string/materials"
             android:theme="@style/AppTheme" />
 
         <activity
-            android:name=".ui.input.ViewNodesActivity"
+            android:name=".ui.input.node.ViewNodesActivity"
             android:label="@string/node"
             android:theme="@style/AppTheme" />
 

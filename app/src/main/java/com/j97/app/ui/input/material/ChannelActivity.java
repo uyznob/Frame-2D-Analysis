@@ -1,4 +1,4 @@
-package com.j97.app.ui.input;
+package com.j97.app.ui.input.material;
 
 import android.os.Bundle;
 import android.view.View;
@@ -13,20 +13,21 @@ import com.j97.app.R;
 import com.j97.app.data.local.AppDatabase;
 import com.j97.app.data.local.MaterialModel;
 
-import static com.j97.app.Utils.area5;
-import static com.j97.app.Utils.ix5;
+import static com.j97.app.Utils.area6;
+import static com.j97.app.Utils.ix6;
 
-
-public class Ibeam extends AppCompatActivity {
+public class ChannelActivity extends AppCompatActivity {
+  private double sum;
   private String hText, wText, twText, tfText;
-  private Double h, w, tw, tf, area, ix, iy;
-  private EditText hEditText, wEditText, twEditText, tfEditText, areaEditText, ixEditText, eEditText;
+  private Double h, w, tw, tf, area, ix;
+  private EditText hEditText, wEditText, twEditText, tfEditText, areaEditText, ixEditText;
+  private EditText eEditText;
 
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     // Set the layout
-    setContentView(R.layout.ibeam_layout);
+    setContentView(R.layout.channel_activity);
     // Take the edit text objects
     eEditText = findViewById(R.id.eEditText);
     hEditText = findViewById(R.id.hEditText);
@@ -47,7 +48,7 @@ public class Ibeam extends AppCompatActivity {
         tfText = tfEditText.getText().toString();
         if ((hText.matches("") || wText.matches("") || twText.matches("") || tfText.matches("")) ||
             (Double.parseDouble(hText) <= 0 || Double.parseDouble(wText) <= 0 || Double.parseDouble(twText) <= 0 || Double.parseDouble(tfText) <= 0)) {
-          Toast toast = Toast.makeText(Ibeam.this, R.string.reinput, Toast.LENGTH_SHORT);
+          Toast toast = Toast.makeText(ChannelActivity.this, R.string.reinput, Toast.LENGTH_SHORT);
           toast.show();
           return;
         }
@@ -56,9 +57,9 @@ public class Ibeam extends AppCompatActivity {
         tw = Double.parseDouble(twText);
         tf = Double.parseDouble(tfText);
         // Calculate properties
-        area = area5(h, w, tw, tf);
+        area = area6(h, w, tw, tf);
         areaEditText.setText(area.toString());
-        ix = ix5(h, w, tw, tf);
+        ix = ix6(h, w, tw, tf);
         ixEditText.setText(ix.toString());
       }
     });
@@ -82,30 +83,30 @@ public class Ibeam extends AppCompatActivity {
         try {
           e = Double.parseDouble(eText);
         } catch (NumberFormatException ignored) {
-          Toast.makeText(Ibeam.this, R.string.invalid_input, Toast.LENGTH_SHORT).show();
+          Toast.makeText(ChannelActivity.this, R.string.invalid_input, Toast.LENGTH_SHORT).show();
           return;
         }
 
         try {
           a = Double.parseDouble(aText);
         } catch (NumberFormatException ignored) {
-          Toast.makeText(Ibeam.this, R.string.invalid_input, Toast.LENGTH_SHORT).show();
+          Toast.makeText(ChannelActivity.this, R.string.invalid_input, Toast.LENGTH_SHORT).show();
           return;
         }
 
         try {
           i = Double.parseDouble(iText);
         } catch (NumberFormatException ignored) {
-          Toast.makeText(Ibeam.this, R.string.invalid_input, Toast.LENGTH_SHORT).show();
+          Toast.makeText(ChannelActivity.this, R.string.invalid_input, Toast.LENGTH_SHORT).show();
           return;
         }
 
-        typeText = "I" + hText + "x" + wText + "x" + twText + "x" + tfText;
+        typeText = "C" + hText + "x" + wText + "x" + twText + "x" + tfText;
         MaterialModel materialModel = new MaterialModel(1, typeText, e, a, i);
-        AppDatabase.getDatabase(Ibeam.this)
+        AppDatabase.getDatabase(ChannelActivity.this)
             .materialDao()
             .insert(materialModel);
-        Toast.makeText(Ibeam.this, R.string.insert_success, Toast.LENGTH_SHORT).show();
+        Toast.makeText(ChannelActivity.this, R.string.insert_success, Toast.LENGTH_SHORT).show();
         finish();
       }
     });

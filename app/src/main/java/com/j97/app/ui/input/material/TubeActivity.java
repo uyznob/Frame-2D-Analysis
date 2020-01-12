@@ -1,4 +1,4 @@
-package com.j97.app.ui.input;
+package com.j97.app.ui.input.material;
 
 import android.os.Bundle;
 import android.view.View;
@@ -13,27 +13,25 @@ import com.j97.app.R;
 import com.j97.app.data.local.AppDatabase;
 import com.j97.app.data.local.MaterialModel;
 
-import static com.j97.app.Utils.area6;
-import static com.j97.app.Utils.ix6;
+import static com.j97.app.Utils.area4;
+import static com.j97.app.Utils.ix4;
 
-public class Channel extends AppCompatActivity {
-  private double sum;
-  private String hText, wText, twText, tfText;
-  private Double h, w, tw, tf, area, ix;
-  private EditText hEditText, wEditText, twEditText, tfEditText, areaEditText, ixEditText;
-  private EditText eEditText;
+
+public class TubeActivity extends AppCompatActivity {
+  private String hText, wText, tText;
+  private Double h, w, t, area, ix, iy;
+  private EditText hEditText, wEditText, tEditText, areaEditText, ixEditText, eEditText;
 
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     // Set the layout
-    setContentView(R.layout.channel_layout);
+    setContentView(R.layout.tube_activity);
     // Take the edit text objects
     eEditText = findViewById(R.id.eEditText);
     hEditText = findViewById(R.id.hEditText);
     wEditText = findViewById(R.id.wEditText);
-    twEditText = findViewById(R.id.twEditText);
-    tfEditText = findViewById(R.id.tfEditText);
+    tEditText = findViewById(R.id.tEditText);
     areaEditText = findViewById(R.id.areaEditText);
     ixEditText = findViewById(R.id.ixEditText);
     // Set up button as in layout
@@ -44,25 +42,24 @@ public class Channel extends AppCompatActivity {
         // Take value
         hText = hEditText.getText().toString();
         wText = wEditText.getText().toString();
-        twText = twEditText.getText().toString();
-        tfText = tfEditText.getText().toString();
-        if ((hText.matches("") || wText.matches("") || twText.matches("") || tfText.matches("")) ||
-            (Double.parseDouble(hText) <= 0 || Double.parseDouble(wText) <= 0 || Double.parseDouble(twText) <= 0 || Double.parseDouble(tfText) <= 0)) {
-          Toast toast = Toast.makeText(Channel.this, R.string.reinput, Toast.LENGTH_SHORT);
-          toast.show();
+        tText = tEditText.getText().toString();
+        if ((hText.matches("") || wText.matches("") || tText.matches("")) ||
+            (Double.parseDouble(hText) <= 0 || Double.parseDouble(wText) <= 0 || Double.parseDouble(tText) <= 0)) {
+          Toast.makeText(TubeActivity.this, R.string.reinput, Toast.LENGTH_SHORT).show();
           return;
         }
         h = Double.parseDouble(hText);
         w = Double.parseDouble(wText);
-        tw = Double.parseDouble(twText);
-        tf = Double.parseDouble(tfText);
+        t = Double.parseDouble(tText);
         // Calculate properties
-        area = area6(h, w, tw, tf);
+        area = area4(h, w, t);
         areaEditText.setText(area.toString());
-        ix = ix6(h, w, tw, tf);
+        ix = ix4(h, w, t);
         ixEditText.setText(ix.toString());
       }
     });
+
+
     Button saveButton = findViewById(R.id.saveButton);
     saveButton.setOnClickListener(new View.OnClickListener() {
       @Override
@@ -72,8 +69,7 @@ public class Channel extends AppCompatActivity {
         String iText = ixEditText.getText().toString();
         String hText = hEditText.getText().toString();
         String wText = wEditText.getText().toString();
-        String twText = twEditText.getText().toString();
-        String tfText = tfEditText.getText().toString();
+        String tText = tEditText.getText().toString();
         String typeText;
 
         double e;
@@ -83,30 +79,30 @@ public class Channel extends AppCompatActivity {
         try {
           e = Double.parseDouble(eText);
         } catch (NumberFormatException ignored) {
-          Toast.makeText(Channel.this, R.string.invalid_input, Toast.LENGTH_SHORT).show();
+          Toast.makeText(TubeActivity.this, R.string.invalid_input, Toast.LENGTH_SHORT).show();
           return;
         }
 
         try {
           a = Double.parseDouble(aText);
         } catch (NumberFormatException ignored) {
-          Toast.makeText(Channel.this, R.string.invalid_input, Toast.LENGTH_SHORT).show();
+          Toast.makeText(TubeActivity.this, R.string.invalid_input, Toast.LENGTH_SHORT).show();
           return;
         }
 
         try {
           i = Double.parseDouble(iText);
         } catch (NumberFormatException ignored) {
-          Toast.makeText(Channel.this, R.string.invalid_input, Toast.LENGTH_SHORT).show();
+          Toast.makeText(TubeActivity.this, R.string.invalid_input, Toast.LENGTH_SHORT).show();
           return;
         }
 
-        typeText = "C" + hText + "x" + wText + "x" + twText + "x" + tfText;
+        typeText = "T" + hText + "x" + wText + "x" + tText;
         MaterialModel materialModel = new MaterialModel(1, typeText, e, a, i);
-        AppDatabase.getDatabase(Channel.this)
+        AppDatabase.getDatabase(TubeActivity.this)
             .materialDao()
             .insert(materialModel);
-        Toast.makeText(Channel.this, R.string.insert_success, Toast.LENGTH_SHORT).show();
+        Toast.makeText(TubeActivity.this, R.string.insert_success, Toast.LENGTH_SHORT).show();
         finish();
       }
     });
