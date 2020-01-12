@@ -25,9 +25,8 @@ public class InputFragment extends Fragment implements View.OnClickListener {
     super.onViewCreated(view, savedInstanceState);
     final Button buttonDefineMaterial = view.findViewById(R.id.button_define_material);
     final Button buttonViewMaterial = view.findViewById(R.id.button_view_material);
-
-
     final Button buttonDefineNode = view.findViewById(R.id.button_define_node);
+
     final Button buttonViewNode = view.findViewById(R.id.button_define_node);
     final Button buttonDefineElement = view.findViewById(R.id.button_define_element);
     final Button buttonViewElement = view.findViewById(R.id.button_define_element);
@@ -60,9 +59,14 @@ public class InputFragment extends Fragment implements View.OnClickListener {
         startActivity(toViewMaterials);
         break;
       case R.id.button_define_node:
+        Intent nodeDefineScreenIntent = new Intent(v.getContext(), NodeDefine.class);
+        startActivity(nodeDefineScreenIntent);
         break;
       case R.id.button_view_node:
+        Intent toViewNodes = new Intent(v.getContext(), ViewNodesActivity.class);
+        startActivity(toViewNodes);
         break;
+
       case R.id.button_define_element:
         break;
       case R.id.button_view_element:

@@ -22,11 +22,12 @@ class Converter {
   }
 }
 
-@Database(entities = {MaterialModel.class}, version = 1, exportSchema = false)
+@Database(entities = {MaterialModel.class, NodeModel.class}, version = 2, exportSchema = false)
 @TypeConverters({Converter.class})
 public abstract class AppDatabase extends RoomDatabase {
 
   public abstract MaterialDao materialDao();
+  public abstract NodeDao nodeDao();
 
   private static volatile AppDatabase INSTANCE;
 
