@@ -20,123 +20,149 @@ import static com.j97.app.Utils.ix7;
 import static java.lang.Math.round;
 
 public class DoubleAngleActivity extends AppCompatActivity {
-  private int i;
-  private double sum;
-  private String hText, wText, dText, tText;
-  private Double h, w, d, t, area, ix, iy, ixg, yg;
-  private EditText hEditText, wEditText, dEditText, tEditText, areaEditText, ixEditText, ixgEditText, eEditText;
+    private int i;
+    private double sum;
+    private String hText, wText, dText, tText;
+    private Double h, w, d, t, area, ix, iy, ixg, yg;
+    private EditText hEditText, wEditText, dEditText, tEditText, areaEditText, ixEditText, ixgEditText, eEditText;
+    private MaterialModel model;
 
-  @Override
-  protected void onCreate(@Nullable Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    // Set the layout
-    setContentView(R.layout.doubleangle_activity);
-    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // Set the layout
+        setContentView(R.layout.doubleangle_activity);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-    // Take the edit text objects
-    eEditText = findViewById(R.id.eEditText);
-    hEditText = findViewById(R.id.hEditText);
-    wEditText = findViewById(R.id.wEditText);
-    dEditText = findViewById(R.id.dEditText);
-    tEditText = findViewById(R.id.tEditText);
-    areaEditText = findViewById(R.id.areaEditText);
-    ixEditText = findViewById(R.id.ixEditText);
-    ixgEditText = findViewById(R.id.ixgEditText);
-    // Set up button as in layout
-    Button calcButton = findViewById(R.id.calcButton);
-    calcButton.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        // Take value
-        hText = hEditText.getText().toString();
-        wText = wEditText.getText().toString();
-        dText = dEditText.getText().toString();
-        tText = tEditText.getText().toString();
-        if ((hText.matches("") || wText.matches("") || dText.matches("") || tText.matches("")) ||
-            (Double.parseDouble(hText) <= 0 || Double.parseDouble(wText) <= 0 || Double.parseDouble(dText) <= 0 || Double.parseDouble(tText) <= 0)) {
-          Toast toast = Toast.makeText(DoubleAngleActivity.this, R.string.reinput, Toast.LENGTH_SHORT);
-          toast.show();
-          return;
-        }
-        h = Double.parseDouble(hText);
-        w = Double.parseDouble(wText);
-        d = Double.parseDouble(dText);
-        t = Double.parseDouble(tText);
-        // Calculate properties
-        area = area7(h, w, d, t);
-        areaEditText.setText(area.toString());
-        ix = ix7(h, w, d, t);
-        yg = yg7(h, w, d, t);
-        ixg = round((ix - area * yg * yg) * 100.0) / 100.0;
-        ixgEditText.setText(ixg.toString());
-      }
-    });
-    Button saveButton = findViewById(R.id.saveButton);
-    saveButton.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        String eText = eEditText.getText().toString();
-        String aText = areaEditText.getText().toString();
-        String iText = ixgEditText.getText().toString();
-        String hText = hEditText.getText().toString();
-        String wText = wEditText.getText().toString();
-        String dText = dEditText.getText().toString();
-        String tText = tEditText.getText().toString();
-        String typeText;
+        // Take the edit text objects
+        eEditText = findViewById(R.id.eEditText);
+        hEditText = findViewById(R.id.hEditText);
+        wEditText = findViewById(R.id.wEditText);
+        dEditText = findViewById(R.id.dEditText);
+        tEditText = findViewById(R.id.tEditText);
+        areaEditText = findViewById(R.id.areaEditText);
+        ixEditText = findViewById(R.id.ixEditText);
+        ixgEditText = findViewById(R.id.ixgEditText);
 
-        double e;
-        double a;
-        double i;
-
-        try {
-          e = Double.parseDouble(eText);
-        } catch (NumberFormatException ignored) {
-          Toast.makeText(DoubleAngleActivity.this, R.string.invalid_input, Toast.LENGTH_SHORT).show();
-          return;
+        // Initialize data
+        model = getIntent().getParcelableExtra("item");
+        if (model != null) {
+            eEditText.setText(String.valueOf(model.getE()));
+            String[] numbers = model.getType().substring(1).split("x");
+            hEditText.setText(numbers[0]);
+            wEditText.setText(numbers[1]);
+            dEditText.setText(numbers[2]);
+            tEditText.setText(numbers[3]);
         }
 
-        try {
-          a = Double.parseDouble(aText);
-        } catch (NumberFormatException ignored) {
-          Toast.makeText(DoubleAngleActivity.this, R.string.invalid_input, Toast.LENGTH_SHORT).show();
-          return;
-        }
+        // Set up button as in layout
+        Button calcButton = findViewById(R.id.calcButton);
+        calcButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Take value
+                hText = hEditText.getText().toString();
+                wText = wEditText.getText().toString();
+                dText = dEditText.getText().toString();
+                tText = tEditText.getText().toString();
+                if ((hText.matches("") || wText.matches("") || dText.matches("") || tText.matches("")) ||
+                        (Double.parseDouble(hText) <= 0 || Double.parseDouble(wText) <= 0 || Double.parseDouble(dText) <= 0 || Double.parseDouble(tText) <= 0)) {
+                    Toast toast = Toast.makeText(DoubleAngleActivity.this, R.string.reinput, Toast.LENGTH_SHORT);
+                    toast.show();
+                    return;
+                }
+                h = Double.parseDouble(hText);
+                w = Double.parseDouble(wText);
+                d = Double.parseDouble(dText);
+                t = Double.parseDouble(tText);
+                // Calculate properties
+                area = area7(h, w, d, t);
+                areaEditText.setText(area.toString());
+                ix = ix7(h, w, d, t);
+                yg = yg7(h, w, d, t);
+                ixg = round((ix - area * yg * yg) * 100.0) / 100.0;
+                ixgEditText.setText(ixg.toString());
+            }
+        });
+        Button saveButton = findViewById(R.id.saveButton);
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String eText = eEditText.getText().toString();
+                String aText = areaEditText.getText().toString();
+                String iText = ixgEditText.getText().toString();
+                String hText = hEditText.getText().toString();
+                String wText = wEditText.getText().toString();
+                String dText = dEditText.getText().toString();
+                String tText = tEditText.getText().toString();
+                String typeText;
 
-        try {
-          i = Double.parseDouble(iText);
-        } catch (NumberFormatException ignored) {
-          Toast.makeText(DoubleAngleActivity.this, R.string.invalid_input, Toast.LENGTH_SHORT).show();
-          return;
-        }
+                double e;
+                double a;
+                double i;
 
-        typeText = "L" + hText + "x" + wText + "x" + dText + "x" + tText;
-        MaterialModel materialModel = new MaterialModel(1, typeText, e, a, i);
-        AppDatabase.getDatabase(DoubleAngleActivity.this)
-            .materialDao()
-            .insert(materialModel);
-        Toast.makeText(DoubleAngleActivity.this, R.string.insert_success, Toast.LENGTH_SHORT).show();
-        finish();
-      }
-    });
-  }
+                try {
+                    e = Double.parseDouble(eText);
+                } catch (NumberFormatException ignored) {
+                    Toast.makeText(DoubleAngleActivity.this, R.string.invalid_input, Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
-  private double yg7(double h, double w, double d, double t) {
-    int n = 20;
-    double e = (h - t) / n;
-    sum = 0;
-    for (int i = 1; i <= n; i++) {
-      sum = sum + (t / 2 + (2 * i - 1) * e / 2) * (e * t); //integration
+                try {
+                    a = Double.parseDouble(aText);
+                } catch (NumberFormatException ignored) {
+                    Toast.makeText(DoubleAngleActivity.this, R.string.invalid_input, Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                try {
+                    i = Double.parseDouble(iText);
+                } catch (NumberFormatException ignored) {
+                    Toast.makeText(DoubleAngleActivity.this, R.string.invalid_input, Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                typeText = "L" + hText + "x" + wText + "x" + dText + "x" + tText;
+
+                if (model == null) {
+                    MaterialModel materialModel = new MaterialModel(1, typeText, e, a, i);
+                    AppDatabase.getDatabase(DoubleAngleActivity.this)
+                            .materialDao()
+                            .insert(materialModel);
+                    Toast.makeText(DoubleAngleActivity.this, R.string.insert_success, Toast.LENGTH_SHORT).show();
+                } else {
+                    model.setE(e);
+                    model.setA(a);
+                    model.setI(i);
+                    model.setType(typeText);
+
+                    AppDatabase.getDatabase(DoubleAngleActivity.this)
+                            .materialDao()
+                            .update(model);
+                    Toast.makeText(DoubleAngleActivity.this, R.string.update_success, Toast.LENGTH_SHORT).show();
+                }
+                finish();
+            }
+        });
     }
-    return round((2 * sum / area7(h, w, d, t)) * 100.0) / 100.0;
-  } //Distance of center in the x direction
+
+    private double yg7(double h, double w, double d, double t) {
+        int n = 20;
+        double e = (h - t) / n;
+        sum = 0;
+        for (int i = 1; i <= n; i++) {
+            sum = sum + (t / 2 + (2 * i - 1) * e / 2) * (e * t); //integration
+        }
+        return round((2 * sum / area7(h, w, d, t)) * 100.0) / 100.0;
+    } //Distance of center in the x direction
 
 
-  @Override
-  public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-    if (item.getItemId() == android.R.id.home) {
-      finish();
-      return true;
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
-    return super.onOptionsItemSelected(item);
-  }
 }

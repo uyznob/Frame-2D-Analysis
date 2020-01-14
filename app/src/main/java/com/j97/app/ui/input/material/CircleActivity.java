@@ -19,95 +19,119 @@ import static com.j97.app.Utils.area2;
 import static com.j97.app.Utils.ix2;
 
 public class CircleActivity extends AppCompatActivity {
-  private String dText;
-  private Double d, area, ix, iy;
-  private EditText dEditText, areaEditText, ixEditText, eEditText;
+    private String dText;
+    private Double d, area, ix, iy;
+    private EditText dEditText, areaEditText, ixEditText, eEditText;
+    private MaterialModel model;
 
-  @Override
-  protected void onCreate(@Nullable Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    // Set the layout
-    setContentView(R.layout.circle_activity);
-    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // Set the layout
+        setContentView(R.layout.circle_activity);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-    // Take the edit text objects
-    dEditText = findViewById(R.id.dEditText);
-    eEditText = findViewById(R.id.eEditText);
-    areaEditText = findViewById(R.id.areaEditText);
-    ixEditText = findViewById(R.id.ixEditText);
-    // Set up button as in layout
-    Button calcButton = findViewById(R.id.calcButton);
-    calcButton.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        // Take value
-        dText = dEditText.getText().toString();
-        if ((dText.matches("")) ||
-            (Double.parseDouble(dText) <= 0)) {
-          Toast.makeText(CircleActivity.this, R.string.reinput, Toast.LENGTH_SHORT).show();
-          return;
-        }
-        d = Double.parseDouble(dText);
-        // Calculate properties
-        area = area2(d);
-        areaEditText.setText(area.toString());
-        ix = ix2(d);
-        ixEditText.setText(ix.toString());
-      }
-    });
-    Button saveButton = findViewById(R.id.saveButton);
-    saveButton.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        String eText = eEditText.getText().toString();
-        String aText = areaEditText.getText().toString();
-        String iText = ixEditText.getText().toString();
-        String dText = dEditText.getText().toString();
-        String typeText;
+        // Take the edit text objects
+        dEditText = findViewById(R.id.dEditText);
+        eEditText = findViewById(R.id.eEditText);
+        areaEditText = findViewById(R.id.areaEditText);
+        ixEditText = findViewById(R.id.ixEditText);
 
-        double e;
-        double a;
-        double i;
-
-        try {
-          e = Double.parseDouble(eText);
-        } catch (NumberFormatException ignored) {
-          Toast.makeText(CircleActivity.this, R.string.invalid_input, Toast.LENGTH_SHORT).show();
-          return;
+        // Initialize data
+        model = getIntent().getParcelableExtra("item");
+        if (model != null) {
+            eEditText.setText(String.valueOf(model.getE()));
+            String[] numbers = model.getType().substring(1).split("x");
+            dEditText.setText(numbers[0]);
         }
 
-        try {
-          a = Double.parseDouble(aText);
-        } catch (NumberFormatException ignored) {
-          Toast.makeText(CircleActivity.this, R.string.invalid_input, Toast.LENGTH_SHORT).show();
-          return;
-        }
+        // Set up button as in layout
+        Button calcButton = findViewById(R.id.calcButton);
+        calcButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Take value
+                dText = dEditText.getText().toString();
+                if ((dText.matches("")) ||
+                        (Double.parseDouble(dText) <= 0)) {
+                    Toast.makeText(CircleActivity.this, R.string.reinput, Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                d = Double.parseDouble(dText);
+                // Calculate properties
+                area = area2(d);
+                areaEditText.setText(area.toString());
+                ix = ix2(d);
+                ixEditText.setText(ix.toString());
+            }
+        });
+        Button saveButton = findViewById(R.id.saveButton);
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String eText = eEditText.getText().toString();
+                String aText = areaEditText.getText().toString();
+                String iText = ixEditText.getText().toString();
+                String dText = dEditText.getText().toString();
+                String typeText;
 
-        try {
-          i = Double.parseDouble(iText);
-        } catch (NumberFormatException ignored) {
-          Toast.makeText(CircleActivity.this, R.string.invalid_input, Toast.LENGTH_SHORT).show();
-          return;
-        }
+                double e;
+                double a;
+                double i;
 
-        typeText = "D" + dText;
-        MaterialModel materialModel = new MaterialModel(1, typeText, e, a, i);
-        AppDatabase.getDatabase(CircleActivity.this)
-            .materialDao()
-            .insert(materialModel);
-        Toast.makeText(CircleActivity.this, R.string.insert_success, Toast.LENGTH_SHORT).show();
-        finish();
-      }
-    });
-  }
+                try {
+                    e = Double.parseDouble(eText);
+                } catch (NumberFormatException ignored) {
+                    Toast.makeText(CircleActivity.this, R.string.invalid_input, Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
+                try {
+                    a = Double.parseDouble(aText);
+                } catch (NumberFormatException ignored) {
+                    Toast.makeText(CircleActivity.this, R.string.invalid_input, Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
-  @Override
-  public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-    if (item.getItemId() == android.R.id.home) {
-      finish();
-      return true;
+                try {
+                    i = Double.parseDouble(iText);
+                } catch (NumberFormatException ignored) {
+                    Toast.makeText(CircleActivity.this, R.string.invalid_input, Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                typeText = "D" + dText;
+
+                if (model == null) {
+                    MaterialModel materialModel = new MaterialModel(1, typeText, e, a, i);
+                    AppDatabase.getDatabase(CircleActivity.this)
+                            .materialDao()
+                            .insert(materialModel);
+                    Toast.makeText(CircleActivity.this, R.string.insert_success, Toast.LENGTH_SHORT).show();
+                    finish();
+                } else {
+                    model.setE(e);
+                    model.setA(a);
+                    model.setI(i);
+                    model.setType(typeText);
+
+                    AppDatabase.getDatabase(CircleActivity.this)
+                            .materialDao()
+                            .update(model);
+                    Toast.makeText(CircleActivity.this, R.string.update_success, Toast.LENGTH_SHORT).show();
+                }
+                finish();
+            }
+        });
     }
-    return super.onOptionsItemSelected(item);
-  }
+
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }

@@ -62,7 +62,7 @@ public class NodeCustomActivity extends AppCompatActivity implements View.OnClic
             return;
         }
 
-        NodeModel nodeModel = new NodeModel(1,x,y);
+        NodeModel nodeModel = new NodeModel(1, x, y);
         AppDatabase.getDatabase(this)
                 .nodeDao()
                 .insert(nodeModel);

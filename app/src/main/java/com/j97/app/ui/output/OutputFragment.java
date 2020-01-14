@@ -12,9 +12,9 @@ import androidx.fragment.app.Fragment;
 import com.j97.app.R;
 
 public class OutputFragment extends Fragment {
-  @Nullable
-  @Override
-  public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-    return inflater.inflate(R.layout.fragment_output, container, false);
-  }
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_output, container, false);
+    }
 }
